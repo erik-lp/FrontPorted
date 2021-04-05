@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Main-Class: FrontPortedInstaller
+Specification-Title: FrontPorted
+Specification-Vendor: ErikLP
+Specification-Version: 1
+Implementation-Title: FrontPorted (Fabric)
+Implementation-Version: task ':jar' property 'archiveVersion'
+Implementation-Vendor: ErikLP

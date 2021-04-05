@@ -1,0 +1,27 @@
+{
+    "schemaVersion": 1,
+    "id": "frontported",
+    "version": "${version}",
+    "name": "FrontPorted",
+    "description": "A fabric mod for 1.16.5 that front-ports features from older mods (e.g. ToggleSprint or Keystrokes) and also adds some custom QOL features.",
+    "authors": [
+        "ErikLP"
+    ],
+    "contact": {},
+    "license": "MIT",
+    "icon": "assets/frontported/icon.png",
+    "environment": "client",
+    "entrypoints": {
+        "main": [
+            "me.erik.frontported.FrontPorted"
+        ]
+    },
+    "mixins": [
+        "frontported.mixins.json"
+    ],
+    "depends": {
+        "fabricloader": ">=0.11.3",
+        "fabric": "*",
+        "minecraft": "1.16.5"
+    }
+}

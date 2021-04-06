@@ -63,7 +63,6 @@ jar {
     from "LICENSE"
     manifest {
         attributes([
-                "Main-Class": "FrontPortedInstaller",
                 "Specification-Title"     : "FrontPorted",
                 "Specification-Vendor"    : "ErikLP",
                 "Specification-Version"   : "1", // We are version 1 of ourselves

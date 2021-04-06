@@ -1,5 +1,4 @@
 Manifest-Version: 1.0
-Main-Class: FrontPortedInstaller
 Specification-Title: FrontPorted
 Specification-Vendor: ErikLP
 Specification-Version: 1

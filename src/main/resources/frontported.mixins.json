@@ -4,6 +4,12 @@
     "package": "me.erik.frontported.mixin",
     "compatibilityLevel": "JAVA_8",
     "mixins": [
+        "CameraMixin",
+        "GameRendererMixin",
+        "InGameHudMixin",
+        "LivingEntityMixin",
+        "OptionsScreenMixin",
+        "RenderSystemMixin"
     ],
     "client": [
     ],

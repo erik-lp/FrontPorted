@@ -3,39 +3,44 @@ package me.erik.frontported.config;
 public class Config {
     
     public boolean enableToggleSprint;
-    public boolean enableToggleSprintHUD;
+    public boolean enableToggleSprintHud;
     public double toggleSprintX;
     public double toggleSprintY;
     
     public boolean enableToggleSneak;
-    public boolean enableToggleSneakHUD;
+    public boolean enableToggleSneakHud;
     public double toggleSneakX;
     public double toggleSneakY;
     
     public boolean enableKillSound;
-    public double killSoundVolumeInPercent;
+    public double killSoundVolume;
     
     public boolean fullBright;
+    
     public boolean fastSneaking;
+    
     public boolean disableHurtBobbing;
     
-    public boolean enableSlotLocking;
+    public double fireOverlayReduction;
+    
+    public boolean chatTimeStamps;
     
     public Config() {
         enableToggleSprint = true;
-        enableToggleSprintHUD = true;
+        enableToggleSprintHud = true;
         toggleSprintX = 5D;
         toggleSprintY = 348D;
         enableToggleSneak = true;
-        enableToggleSneakHUD = true;
+        enableToggleSneakHud = true;
         toggleSneakX = 5D;
         toggleSneakY = 338D;
         enableKillSound = true;
-        killSoundVolumeInPercent = 80D;
+        killSoundVolume = 80D;
         fullBright = true;
         fastSneaking = true;
         disableHurtBobbing = true;
-        enableSlotLocking = true;
+        fireOverlayReduction = 40D;
+        chatTimeStamps = true;
     }
     
 }

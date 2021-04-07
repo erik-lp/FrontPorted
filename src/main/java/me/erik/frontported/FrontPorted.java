@@ -18,16 +18,20 @@ import java.nio.charset.StandardCharsets;
 
 public class FrontPorted implements ModInitializer {
     
-    public static Config config;
-    
-    public static final File configFile = new File("config/frontported.json");
+    public static final File configFile = new File("config/frontported/config.json");
     public static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
     
+    public static Config config;
     public static KeyBinding TOGGLE_SPRINT_KEY;
     public static KeyBinding TOGGLE_SNEAK_KEY;
     
     @Override
     public void onInitialize() {
+        
+        File modDir = new File("config/frontported");
+        if (!modDir.exists())
+            //noinspection ResultOfMethodCallIgnored
+            modDir.mkdirs();
         
         TOGGLE_SPRINT_KEY = new KeyBinding("ToggleSprint", GLFW.GLFW_KEY_G, "FrontPorted");
         TOGGLE_SNEAK_KEY = new KeyBinding("ToggleSneak", GLFW.GLFW_KEY_V, "FrontPorted");

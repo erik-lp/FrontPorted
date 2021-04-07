@@ -1,5 +1,9 @@
 {
-    "frontported.options.title": "FrontPorted Options",
+    "frontported.main.toggleSneak": "ToggleSneak",
+    "frontported.main.toggleSprint": "ToggleSprint",
+    "frontported.main.killSounds": "Kill Sounds",
+    "frontported.main.misc": "Miscellaneous",
+    "frontported.main.title": "FrontPorted Options",
     "frontported.options.togglesprint": "ToggleSprint",
     "frontported.options.togglesprinthud": "ToggleSprint HUD",
     "frontported.options.togglesprintx": "ToggleSprint X: %f",
@@ -11,7 +15,8 @@
     "frontported.options.fullbright": "FullBright",
     "frontported.options.fastsneak": "Fast Sneaking",
     "frontported.options.disablehurtbobbing": "Disable Hurt Bobbing",
-    "frontported.options.slotlocking": "Slot Locking",
     "frontported.options.killsound": "Kill Sounds",
-    "frontported.options.killsoundvolume": "Kill Sound Volume: %f%%"
+    "frontported.options.killsoundvolume": "Kill Sound Volume: %f%%",
+    "frontported.options.timestamps": "Chat Timestamps",
+    "frontported.options.firereduction": "Fire Overlay Reduction: %f%%"
 }

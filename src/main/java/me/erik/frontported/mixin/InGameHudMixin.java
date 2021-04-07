@@ -12,7 +12,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
  * Taken from Giz5Mod under MIT license (https://github.com/Toshimichi0915/giz5/blob/master/LICENSE.md)
- * @author Toshimichi0915
  */
 @Mixin(InGameHud.class)
 public class InGameHudMixin {
@@ -22,9 +21,9 @@ public class InGameHudMixin {
     
     @Inject(at = @At("TAIL"), method = "render(Lnet/minecraft/client/util/math/MatrixStack;F)V")
     public void render(MatrixStack stack, float f, CallbackInfo info) {
-        if (FrontPorted.config.enableToggleSprint)
+        if (FrontPorted.config.enableToggleSprint && FrontPorted.config.enableToggleSprintHud)
             toggleSprintHud.render(stack);
-        if (FrontPorted.config.enableToggleSneak)
+        if (FrontPorted.config.enableToggleSneak && FrontPorted.config.enableToggleSneakHud)
             toggleSneakHud.render(stack);
     }
     

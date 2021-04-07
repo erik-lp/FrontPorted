@@ -7,8 +7,9 @@
         "CameraMixin",
         "GameRendererMixin",
         "InGameHudMixin",
+        "InGameOverlayRendererMixin",
         "LivingEntityMixin",
-        "OptionsScreenMixin",
+        "GameMenuScreenMixin",
         "RenderSystemMixin"
     ],
     "client": [

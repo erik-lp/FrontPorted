@@ -4,15 +4,15 @@ import me.erik.frontported.FrontPorted;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.MinecraftClient;
 
+/**
+ * Taken from Giz5Mod under MIT license (https://github.com/Toshimichi0915/giz5/blob/master/LICENSE.md)
+ * @author Toshimichi0915
+ */
 public class ToggleSprint implements ClientTickEvents.StartTick {
     
     private boolean lastPressed;
     public static boolean sprinting;
     
-    /**
-     * Taken from Giz5Mod under MIT license (https://github.com/Toshimichi0915/giz5/blob/master/LICENSE.md)
-     * @author Toshimichi0915
-     */
     @Override
     public void onStartTick(MinecraftClient client) {
         if (client.player == null)

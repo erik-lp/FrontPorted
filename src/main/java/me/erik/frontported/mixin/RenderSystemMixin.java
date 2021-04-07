@@ -9,7 +9,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
  * Taken from Giz5Mod under MIT license (https://github.com/Toshimichi0915/giz5/blob/master/LICENSE.md)
- * @author Toshimichi0915
  */
 @Mixin(RenderSystem.class)
 public class RenderSystemMixin {

@@ -26,11 +26,6 @@ public final class MiscOptionsScreen extends FrontPortedOptionsScreen {
                     p -> FrontPorted.config.disableHurtBobbing,
                     (s, b) -> FrontPorted.config.disableHurtBobbing = b),
             
-            new BooleanOption(
-                    "frontported.options.timestamps",
-                    p -> FrontPorted.config.chatTimeStamps,
-                    (s, b) -> FrontPorted.config.chatTimeStamps = b),
-            
             new DoubleOption(
                     "frontported.options.firereduction",
                     0D, 100D, 0.5F,

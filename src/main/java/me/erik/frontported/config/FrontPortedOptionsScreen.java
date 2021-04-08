@@ -26,7 +26,7 @@ public abstract class FrontPortedOptionsScreen extends GameOptionsScreen {
         
         for (int i = 0; i < this.options.length; i++) {
             Option option = this.options[i];
-            int x = (this.options.length > 6) ? (this.width / 2 - 155 + i % 2 * 160) : (this.width / 2 - 75);
+            int x = (this.options.length > 10) ? (this.width / 2 - 155 + i % 2 * 160) : (this.width / 2 - 75);
             int y = this.height / 6 + (24 * i);
             this.addButton(option.createButton(this.client.options, x, y, 150));
         }

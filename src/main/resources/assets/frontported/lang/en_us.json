@@ -2,6 +2,7 @@
     "frontported.main.toggleSneak": "ToggleSneak",
     "frontported.main.toggleSprint": "ToggleSprint",
     "frontported.main.killSounds": "Kill Sounds",
+    "frontported.main.chat": "Chat",
     "frontported.main.misc": "Miscellaneous",
     "frontported.main.title": "FrontPorted Options",
     "frontported.options.togglesprint": "ToggleSprint",
@@ -17,6 +18,14 @@
     "frontported.options.disablehurtbobbing": "Disable Hurt Bobbing",
     "frontported.options.killsound": "Kill Sounds",
     "frontported.options.killsoundvolume": "Kill Sound Volume: %f%%",
+    "frontported.options.customchatbackground": "Custom Chat Background",
+    "frontported.options.customchatred": "Custom Chat Red: %f",
+    "frontported.options.customchatgreen": "Custom Chat Green: %f",
+    "frontported.options.customchatblue": "Custom Chat Blue: %f",
+    "frontported.options.customchatalpha": "Custom Chat Alpha: %f",
+    "frontported.options.backgrounduntilendofline": "Only Render Chat until Newline",
+    "frontported.options.firereduction": "Fire Overlay Reduction: %f%%",
     "frontported.options.timestamps": "Chat Timestamps",
-    "frontported.options.firereduction": "Fire Overlay Reduction: %f%%"
+    "frontported.options.24h": "24h Format",
+    "frontported.options.showseconds": "Show seconds"
 }

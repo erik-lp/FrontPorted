@@ -5,11 +5,12 @@
     "compatibilityLevel": "JAVA_8",
     "mixins": [
         "CameraMixin",
+        "ChatHudMixin",
+        "GameMenuScreenMixin",
         "GameRendererMixin",
         "InGameHudMixin",
         "InGameOverlayRendererMixin",
         "LivingEntityMixin",
-        "GameMenuScreenMixin",
         "RenderSystemMixin"
     ],
     "client": [

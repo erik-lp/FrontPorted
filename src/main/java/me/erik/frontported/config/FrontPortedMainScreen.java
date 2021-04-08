@@ -48,10 +48,19 @@ public final class FrontPortedMainScreen extends Screen {
                 button -> this.client.openScreen(new KillSoundsOptionsScreen(this))
         ));
         
-        // "Miscellaneous" Button
+        // "Chat" Button
         this.addButton(new ButtonWidget(
                 this.width / 2 - 75,
                 this.height / 6 + 72,
+                150, 20,
+                new TranslatableText("frontported.main.chat"),
+                button -> this.client.openScreen(new ChatOptionsScreen(this))
+        ));
+        
+        // "Miscellaneous" Button
+        this.addButton(new ButtonWidget(
+                this.width / 2 - 75,
+                this.height / 6 + 96,
                 150, 20,
                 new TranslatableText("frontported.main.misc"),
                 button -> this.client.openScreen(new MiscOptionsScreen(this))

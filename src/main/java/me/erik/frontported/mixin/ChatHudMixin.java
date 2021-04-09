@@ -45,8 +45,12 @@ public abstract class ChatHudMixin {
     private int scrolledLines;
     
     @Shadow
+    private boolean hasUnreadNewMessages;
+    
+    @Shadow
     protected abstract void addMessage(Text message, int messageId);
     
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     @Shadow
     protected abstract boolean isChatHidden();
     
@@ -92,7 +96,7 @@ public abstract class ChatHudMixin {
     
     @SuppressWarnings("deprecation")
     @Inject(at = @At("HEAD"), method = "render", cancellable = true)
-    public void render(MatrixStack matrices, int tickDelta, CallbackInfo ci) {
+    public void renderCustomBackground(MatrixStack matrices, int tickDelta, CallbackInfo ci) {
         
         if (FrontPorted.config.customChatBackground) {
             
@@ -200,6 +204,94 @@ public abstract class ChatHudMixin {
                         int z = x * x / w;
                         if (w != x) {
                             fill(matrices, 2, -y, 1, -y - z, backgroundColor);
+                        }
+                    }
+                    
+                    RenderSystem.popMatrix();
+                    
+                }
+                
+            }
+            
+            ci.cancel();
+            
+        } else if (FrontPorted.config.onlyRenderChatUntilNewline) {
+            
+            if (!this.isChatHidden()) {
+                
+                this.processMessageQueue();
+                int i = this.getVisibleLineCount();
+                int j = this.visibleMessages.size();
+                if (j > 0) {
+                    boolean bl = this.isChatFocused();
+    
+                    double d = this.getChatScale();
+                    RenderSystem.pushMatrix();
+                    RenderSystem.translatef(2.0F, 8.0F, 0.0F);
+                    RenderSystem.scaled(d, d, 1.0D);
+                    double e = this.client.options.chatOpacity * 0.8999999761581421D + 0.10000000149011612D;
+                    double f = this.client.options.textBackgroundOpacity;
+                    double g = 9.0D * (this.client.options.chatLineSpacing + 1.0D);
+                    double h = -8.0D * (this.client.options.chatLineSpacing + 1.0D) + 4.0D * this.client.options.chatLineSpacing;
+                    int l = 0;
+                    
+                    int m;
+                    int x;
+                    int aa;
+                    int ab;
+                    for (m = 0; m + this.scrolledLines < this.visibleMessages.size() && m < i; ++m) {
+                        ChatHudLine<OrderedText> chatHudLine = this.visibleMessages.get(m + this.scrolledLines);
+                        if (chatHudLine != null) {
+                            x = tickDelta - chatHudLine.getCreationTick();
+                            if (x < 200 || bl) {
+                                double o = bl ? 1.0D : getMessageOpacityMultiplier(x);
+                                aa = (int) (255.0D * o * e);
+                                ab = (int) (255.0D * o * f);
+                                ++l;
+                                if (aa > 3) {
+                                    double s = (double) (-m) * g;
+                                    matrices.push();
+                                    matrices.translate(0.0D, 0.0D, 50.0D);
+                                    fill(matrices, -2, (int) (s - g), MinecraftClient.getInstance().textRenderer.getWidth(chatHudLine.getText()) + 2, (int) s, ab << 24);
+                                    RenderSystem.enableBlend();
+                                    matrices.translate(0.0D, 0.0D, 50.0D);
+                                    this.client.textRenderer.drawWithShadow(matrices, chatHudLine.getText(), 0.0F, (float) ((int) (s + h)), 16777215 + (aa << 24));
+                                    RenderSystem.disableAlphaTest();
+                                    RenderSystem.disableBlend();
+                                    matrices.pop();
+                                }
+                            }
+                        }
+                    }
+                    
+                    int w;
+                    if (!this.messageQueue.isEmpty()) {
+                        Text text = new TranslatableText("chat.queue", this.messageQueue.size());
+                        m = (int) (128.0D * e);
+                        w = (int) (255.0D * f);
+                        matrices.push();
+                        matrices.translate(0.0D, 0.0D, 50.0D);
+                        fill(matrices, -2, 0, MinecraftClient.getInstance().textRenderer.getWidth(text) + 2, 9, w << 24);
+                        RenderSystem.enableBlend();
+                        matrices.translate(0.0D, 0.0D, 50.0D);
+                        this.client.textRenderer.drawWithShadow(matrices, text, 0.0F, 1.0F, 0xFFFFFF + (m << 24));
+                        matrices.pop();
+                        RenderSystem.disableAlphaTest();
+                        RenderSystem.disableBlend();
+                    }
+                    
+                    if (bl) {
+                        int v = 9;
+                        RenderSystem.translatef(-3.0F, 0.0F, 0.0F);
+                        w = j * v + j;
+                        x = l * v + l;
+                        int y = this.scrolledLines * x / j;
+                        int z = x * x / w;
+                        if (w != x) {
+                            aa = y > 0 ? 170 : 96;
+                            ab = this.hasUnreadNewMessages ? 0xCC3333 : 0x3333AA;
+                            fill(matrices, 0, -y, 2, -y - z, ab + (aa << 24));
+                            fill(matrices, 2, -y, 1, -y - z, 0xCCCCCC + (aa << 24));
                         }
                     }
                     

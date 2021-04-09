@@ -12,28 +12,30 @@ public final class ToggleSprintOptionsScreen extends FrontPortedOptionsScreen {
     private static final Option[] OPTIONS = new Option[]{
             
             new BooleanOption(
-                    "frontported.options.togglesprint",
+                    "frontported.options.toggleSprint.toggleSprint",
+                    new TranslatableText("frontported.options.toggleSprint.toggleSprint.desc"),
                     p -> FrontPorted.config.enableToggleSprint,
                     (s, b) -> FrontPorted.config.enableToggleSprint = b),
-        
+            
             new BooleanOption(
-                    "frontported.options.togglesprinthud",
+                    "frontported.options.toggleSprint.toggleSprintHud",
+                    new TranslatableText("frontported.options.toggleSprint.toggleSprintHud.desc"),
                     p -> FrontPorted.config.enableToggleSprintHud,
                     (s, b) -> FrontPorted.config.enableToggleSprintHud = b),
             
             new DoubleOption(
-                    "frontported.options.togglesprintx",
+                    "frontported.options.toggleSprint.toggleSprintX",
                     0D, 540D, 1F,
                     p -> FrontPorted.config.toggleSprintX,
                     (s, d) -> FrontPorted.config.toggleSprintX = d,
-                    (s, t) -> new TranslatableText("frontported.options.togglesprintx", String.format("%.0f", FrontPorted.config.toggleSprintX))),
+                    (s, t) -> new TranslatableText("frontported.options.toggleSprint.toggleSprintX", String.format("%.0f", FrontPorted.config.toggleSprintX))),
             
             new DoubleOption(
-                    "frontported.options.togglesprinty",
+                    "frontported.options.toggleSprint.toggleSprintY",
                     0D, 350D, 1F,
                     p -> FrontPorted.config.toggleSprintY,
                     (s, d) -> FrontPorted.config.toggleSprintY = d,
-                    (s, t) -> new TranslatableText("frontported.options.togglesprinty", String.format("%.0f", FrontPorted.config.toggleSprintY))),
+                    (s, t) -> new TranslatableText("frontported.options.toggleSprint.toggleSprintY", String.format("%.0f", FrontPorted.config.toggleSprintY))),
         
     };
     

@@ -12,16 +12,17 @@ public final class KillSoundsOptionsScreen extends FrontPortedOptionsScreen {
     private static final Option[] OPTIONS = new Option[]{
             
             new BooleanOption(
-                    "frontported.options.killsound",
+                    "frontported.options.killSounds.killSound",
+                    new TranslatableText("frontported.options.killSounds.killSound.desc"),
                     p -> FrontPorted.config.enableKillSound,
                     (s, b) -> FrontPorted.config.enableKillSound = b),
             
             new DoubleOption(
-                    "frontported.options.killsoundvolume",
+                    "frontported.options.killSounds.killSoundVolume",
                     0D, 100D, 0.5F,
                     p -> FrontPorted.config.killSoundVolume,
                     (s, d) -> FrontPorted.config.killSoundVolume = d,
-                    (s, t) -> new TranslatableText("frontported.options.killsoundvolume", String.format("%.1f", FrontPorted.config.killSoundVolume))),
+                    (s, t) -> new TranslatableText("frontported.options.killSounds.killSoundVolume", String.format("%.1f", FrontPorted.config.killSoundVolume))),
         
     };
     

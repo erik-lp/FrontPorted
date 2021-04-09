@@ -12,26 +12,29 @@ public final class MiscOptionsScreen extends FrontPortedOptionsScreen {
     private static final Option[] OPTIONS = new Option[]{
             
             new BooleanOption(
-                    "frontported.options.fullbright",
+                    "frontported.options.misc.fullBright",
+                    new TranslatableText("frontported.options.misc.fullBright.desc"),
                     p -> FrontPorted.config.fullBright,
                     (s, b) -> FrontPorted.config.fullBright = b),
             
             new BooleanOption(
-                    "frontported.options.fastsneak",
+                    "frontported.options.misc.fastSneaking",
+                    new TranslatableText("frontported.options.misc.fastSneaking.desc"),
                     p -> FrontPorted.config.fastSneaking,
                     (s, b) -> FrontPorted.config.fastSneaking = b),
             
             new BooleanOption(
-                    "frontported.options.disablehurtbobbing",
+                    "frontported.options.misc.disableHurtBobbing",
+                    new TranslatableText("frontported.options.misc.disableHurtBobbing.desc"),
                     p -> FrontPorted.config.disableHurtBobbing,
                     (s, b) -> FrontPorted.config.disableHurtBobbing = b),
             
             new DoubleOption(
-                    "frontported.options.firereduction",
+                    "frontported.options.misc.fireReduction",
                     0D, 100D, 0.5F,
                     p -> FrontPorted.config.fireOverlayReduction,
                     (s, d) -> FrontPorted.config.fireOverlayReduction = d,
-                    (s, t) -> new TranslatableText("frontported.options.firereduction", String.format("%.0f", FrontPorted.config.fireOverlayReduction))),
+                    (s, t) -> new TranslatableText("frontported.options.misc.fireReduction", String.format("%.0f", FrontPorted.config.fireOverlayReduction))),
         
     };
     

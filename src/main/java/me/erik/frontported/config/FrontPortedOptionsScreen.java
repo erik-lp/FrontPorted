@@ -50,7 +50,7 @@ public abstract class FrontPortedOptionsScreen extends GameOptionsScreen {
     @Override
     public final void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         renderBackground(matrices);
-        drawCenteredText(matrices, this.textRenderer, this.title, this.width / 2, 20, 16777215);
+        drawCenteredText(matrices, this.textRenderer, this.title, this.width / 2, 20, 0xFFFFFF);
         super.render(matrices, mouseX, mouseY, delta);
     }
     

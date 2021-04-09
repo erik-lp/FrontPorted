@@ -3,6 +3,7 @@ package me.erik.frontported.mixin;
 import com.mojang.blaze3d.systems.RenderSystem;
 import me.erik.frontported.FrontPorted;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.hud.ChatHud;
 import net.minecraft.client.gui.hud.ChatHudLine;
 import net.minecraft.client.util.math.MatrixStack;
@@ -13,6 +14,7 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.math.MathHelper;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -24,10 +26,8 @@ import java.util.Deque;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import static net.minecraft.client.gui.DrawableHelper.fill;
-
 @Mixin(ChatHud.class)
-public abstract class ChatHudMixin {
+public abstract class ChatHudMixin extends DrawableHelper {
     
     @Final
     @Shadow
@@ -94,9 +94,13 @@ public abstract class ChatHudMixin {
         return FrontPorted.config.showSeconds ? String.format("%s:%s:%s%s", hours, minutes, seconds, amPm) : String.format("%s:%s%s", hours, minutes, amPm);
     }
     
+    /**
+     * @reason custom chat background
+     * @author ErikLP
+     */
     @SuppressWarnings("deprecation")
-    @Inject(at = @At("HEAD"), method = "render", cancellable = true)
-    public void renderCustomBackground(MatrixStack matrices, int tickDelta, CallbackInfo ci) {
+    @Overwrite
+    public void render(MatrixStack matrices, int tickDelta) {
         
         if (FrontPorted.config.customChatBackground) {
             
@@ -213,9 +217,7 @@ public abstract class ChatHudMixin {
                 
             }
             
-            ci.cancel();
-            
-        } else if (FrontPorted.config.onlyRenderChatUntilNewline) {
+        } else {
             
             if (!this.isChatHidden()) {
                 
@@ -224,8 +226,9 @@ public abstract class ChatHudMixin {
                 int j = this.visibleMessages.size();
                 if (j > 0) {
                     boolean bl = this.isChatFocused();
-    
+                    
                     double d = this.getChatScale();
+                    int k = MathHelper.ceil((double) this.getWidth() / d);
                     RenderSystem.pushMatrix();
                     RenderSystem.translatef(2.0F, 8.0F, 0.0F);
                     RenderSystem.scaled(d, d, 1.0D);
@@ -252,7 +255,10 @@ public abstract class ChatHudMixin {
                                     double s = (double) (-m) * g;
                                     matrices.push();
                                     matrices.translate(0.0D, 0.0D, 50.0D);
-                                    fill(matrices, -2, (int) (s - g), MinecraftClient.getInstance().textRenderer.getWidth(chatHudLine.getText()) + 2, (int) s, ab << 24);
+                                    fill(
+                                            matrices, -2, (int) (s - g),
+                                            (FrontPorted.config.onlyRenderChatUntilNewline) ? (MinecraftClient.getInstance().textRenderer.getWidth(chatHudLine.getText()) + 2) : k + 4,
+                                            (int) s, ab << 24);
                                     RenderSystem.enableBlend();
                                     matrices.translate(0.0D, 0.0D, 50.0D);
                                     this.client.textRenderer.drawWithShadow(matrices, chatHudLine.getText(), 0.0F, (float) ((int) (s + h)), 16777215 + (aa << 24));
@@ -271,7 +277,10 @@ public abstract class ChatHudMixin {
                         w = (int) (255.0D * f);
                         matrices.push();
                         matrices.translate(0.0D, 0.0D, 50.0D);
-                        fill(matrices, -2, 0, MinecraftClient.getInstance().textRenderer.getWidth(text) + 2, 9, w << 24);
+                        fill(
+                                matrices, -2, 0,
+                                (FrontPorted.config.onlyRenderChatUntilNewline) ? (MinecraftClient.getInstance().textRenderer.getWidth(text) + 2) : k + 4,
+                                9, w << 24);
                         RenderSystem.enableBlend();
                         matrices.translate(0.0D, 0.0D, 50.0D);
                         this.client.textRenderer.drawWithShadow(matrices, text, 0.0F, 1.0F, 0xFFFFFF + (m << 24));
@@ -300,8 +309,6 @@ public abstract class ChatHudMixin {
                 }
                 
             }
-            
-            ci.cancel();
             
         }
         

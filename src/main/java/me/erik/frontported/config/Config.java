@@ -35,6 +35,9 @@ public class Config {
     public boolean _24hFormat;
     public boolean showSeconds;
     
+    public boolean confirmDisconnect;
+    public boolean confirmLanguageChange;
+    
     public Config() {
         enableToggleSprint = true;
         enableToggleSprintHud = true;
@@ -59,6 +62,8 @@ public class Config {
         chatTimeStamps = true;
         _24hFormat = true;
         showSeconds = true;
+        confirmDisconnect = false;
+        confirmLanguageChange = true;
     }
     
 }

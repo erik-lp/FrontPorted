@@ -25,17 +25,17 @@ public final class ToggleSprintOptionsScreen extends FrontPortedOptionsScreen {
             
             new DoubleOption(
                     "frontported.options.toggleSprint.toggleSprintX",
-                    0D, 540D, 1F,
-                    p -> FrontPorted.config.toggleSprintX,
-                    (s, d) -> FrontPorted.config.toggleSprintX = d,
-                    (s, t) -> new TranslatableText("frontported.options.toggleSprint.toggleSprintX", String.format("%.0f", FrontPorted.config.toggleSprintX))),
+                    0D, 1920D, 1F,
+                    p -> FrontPorted.config.toggleSprint_x,
+                    (s, d) -> FrontPorted.config.toggleSprint_x = d,
+                    (s, t) -> new TranslatableText("frontported.options.toggleSprint.toggleSprintX", String.format("%.0f", FrontPorted.config.toggleSprint_x))),
             
             new DoubleOption(
                     "frontported.options.toggleSprint.toggleSprintY",
-                    0D, 350D, 1F,
-                    p -> FrontPorted.config.toggleSprintY,
-                    (s, d) -> FrontPorted.config.toggleSprintY = d,
-                    (s, t) -> new TranslatableText("frontported.options.toggleSprint.toggleSprintY", String.format("%.0f", FrontPorted.config.toggleSprintY))),
+                    0D, 1080D, 1F,
+                    p -> FrontPorted.config.toggleSprint_y,
+                    (s, d) -> FrontPorted.config.toggleSprint_y = d,
+                    (s, t) -> new TranslatableText("frontported.options.toggleSprint.toggleSprintY", String.format("%.0f", FrontPorted.config.toggleSprint_y))),
         
     };
     

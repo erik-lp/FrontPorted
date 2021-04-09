@@ -8,6 +8,7 @@ import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.options.Option;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 
 public abstract class FrontPortedOptionsScreen extends GameOptionsScreen {
     
@@ -26,9 +27,19 @@ public abstract class FrontPortedOptionsScreen extends GameOptionsScreen {
         
         for (int i = 0; i < this.options.length; i++) {
             Option option = this.options[i];
-            int x = (this.options.length > 10) ? (this.width / 2 - 155 + i % 2 * 160) : (this.width / 2 - 75);
+            int x = this.width / 2 - 75;
             int y = this.height / 6 + (24 * i);
             this.addButton(option.createButton(this.client.options, x, y, 150));
+        }
+        
+        if (this instanceof VanillaOptionsScreen) {
+            this.addButton(new ButtonWidget(
+                    this.width / 2 - 75,
+                    this.height / 6 + 24 * this.buttons.size(),
+                    150, 20,
+                    new TranslatableText("frontported.options.vanilla.editPositions"),
+                    button -> this.client.openScreen(new VanillaPositionsScreen(this))
+            ));
         }
         
         this.addButton(new ButtonWidget(

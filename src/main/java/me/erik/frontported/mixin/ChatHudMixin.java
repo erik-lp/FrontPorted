@@ -7,7 +7,6 @@ import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.hud.ChatHud;
 import net.minecraft.client.gui.hud.ChatHudLine;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.OrderedText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
@@ -77,7 +76,7 @@ public abstract class ChatHudMixin extends DrawableHelper {
     @Inject(at = @At("HEAD"), method = "addMessage(Lnet/minecraft/text/Text;)V", cancellable = true)
     public void addMessage(Text message, CallbackInfo info) {
         if (FrontPorted.config.chatTimeStamps) {
-            addMessage(new LiteralText("[" + getTimeStamp() + "] " + message.getString()), 0);
+            addMessage(Text.of("[" + getTimeStamp() + "] " + message.getString()), 0);
             info.cancel();
         }
     }

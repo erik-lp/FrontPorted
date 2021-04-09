@@ -29,6 +29,12 @@ public final class MiscOptionsScreen extends FrontPortedOptionsScreen {
                     p -> FrontPorted.config.disableHurtBobbing,
                     (s, b) -> FrontPorted.config.disableHurtBobbing = b),
             
+            new BooleanOption(
+                    "frontported.options.misc.disablePumpkinOverlay",
+                    new TranslatableText("frontported.options.misc.disablePumpkinOverlay.desc"),
+                    p -> FrontPorted.config.disablePumpkinOverlay,
+                    (s, b) -> FrontPorted.config.disablePumpkinOverlay = b),
+            
             new DoubleOption(
                     "frontported.options.misc.fireReduction",
                     0D, 100D, 0.5F,

@@ -10,6 +10,7 @@
         "GameRendererMixin",
         "InGameHudMixin",
         "InGameOverlayRendererMixin",
+        "LanguageOptionsScreenMixin",
         "LivingEntityMixin",
         "RenderSystemMixin"
     ],
@@ -17,6 +18,5 @@
     ],
     "injectors": {
         "defaultRequire": 1
-    },
-    "refmap": "frontported.refmap.json"
+    }
 }

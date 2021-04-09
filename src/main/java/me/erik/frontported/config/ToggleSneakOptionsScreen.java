@@ -25,17 +25,17 @@ public final class ToggleSneakOptionsScreen extends FrontPortedOptionsScreen {
             
             new DoubleOption(
                     "frontported.options.toggleSneak.toggleSneakX",
-                    0D, 540D, 1F,
-                    p -> FrontPorted.config.toggleSneakX,
-                    (s, d) -> FrontPorted.config.toggleSneakX = d,
-                    (s, t) -> new TranslatableText("frontported.options.toggleSneak.toggleSneakX", String.format("%.0f", FrontPorted.config.toggleSneakX))),
+                    0D, 1920D, 1F,
+                    p -> FrontPorted.config.toggleSneak_x,
+                    (s, d) -> FrontPorted.config.toggleSneak_x = d,
+                    (s, t) -> new TranslatableText("frontported.options.toggleSneak.toggleSneakX", String.format("%.0f", FrontPorted.config.toggleSneak_x))),
             
             new DoubleOption(
                     "frontported.options.toggleSneak.toggleSneakY",
-                    0D, 350D, 1F,
-                    p -> FrontPorted.config.toggleSneakY,
-                    (s, d) -> FrontPorted.config.toggleSneakY = d,
-                    (s, t) -> new TranslatableText("frontported.options.toggleSneak.toggleSneakY", String.format("%.0f", FrontPorted.config.toggleSneakY))),
+                    0D, 1080D, 1F,
+                    p -> FrontPorted.config.toggleSneak_y,
+                    (s, d) -> FrontPorted.config.toggleSneak_y = d,
+                    (s, t) -> new TranslatableText("frontported.options.toggleSneak.toggleSneakY", String.format("%.0f", FrontPorted.config.toggleSneak_y))),
         
     };
     

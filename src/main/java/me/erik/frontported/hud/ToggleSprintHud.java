@@ -22,8 +22,8 @@ public class ToggleSprintHud extends DrawableHelper {
         client.getProfiler().push("toggleSprint");
         RenderSystem.pushMatrix();
         
-        float x = (float) FrontPorted.config.toggleSprintX;
-        float y = (float) FrontPorted.config.toggleSprintY;
+        float x = (float) (FrontPorted.config.toggleSprint_x / 1920D * MinecraftClient.getInstance().getWindow().getScaledWidth());
+        float y = (float) (FrontPorted.config.toggleSprint_y / 1080D * MinecraftClient.getInstance().getWindow().getScaledHeight());
         
         if (ToggleSprint.sprinting) {
             String toggleSprintEnabled = new TranslatableText("Sprinting [Toggled]").getString();

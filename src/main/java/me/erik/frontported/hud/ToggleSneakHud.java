@@ -3,7 +3,6 @@ package me.erik.frontported.hud;
 import com.mojang.blaze3d.systems.RenderSystem;
 import me.erik.frontported.FrontPorted;
 import me.erik.frontported.features.ToggleSneak;
-import me.erik.frontported.features.ToggleSprint;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawableHelper;
@@ -16,11 +15,11 @@ public class ToggleSneakHud extends DrawableHelper {
         
         MinecraftClient client = MinecraftClient.getInstance();
         TextRenderer renderer = client.textRenderer;
-        client.getProfiler().push("toggleSprint");
+        client.getProfiler().push("toggleSneak");
         RenderSystem.pushMatrix();
         
-        float x = (float) FrontPorted.config.toggleSneakX;
-        float y = (float) FrontPorted.config.toggleSneakY;
+        float x = (float) (FrontPorted.config.toggleSneak_x / 1920D * MinecraftClient.getInstance().getWindow().getScaledWidth());
+        float y = (float) (FrontPorted.config.toggleSneak_y / 1080D * MinecraftClient.getInstance().getWindow().getScaledHeight());
         
         if (ToggleSneak.sneaking) {
             String toggleSprintEnabled = new TranslatableText("Sneaking [Toggled]").getString();

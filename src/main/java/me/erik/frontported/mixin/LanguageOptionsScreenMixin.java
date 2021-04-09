@@ -40,13 +40,12 @@ public class LanguageOptionsScreenMixin extends GameOptionsScreen {
      * @reason Language change confirmation
      * @author ErikLP
      */
+    @SuppressWarnings("ConstantConditions")
     @Overwrite
     public void init() {
         if (this.client == null)
             return;
-        GameOptionsScreen temp = this;
-        LanguageOptionsScreen instance = (LanguageOptionsScreen) temp;
-        this.languageSelectionList = instance.new LanguageSelectionListWidget(this.client);
+        this.languageSelectionList = ((LanguageOptionsScreen) (Object) (this)).new LanguageSelectionListWidget(this.client);
         this.children.add(this.languageSelectionList);
         this.forceUnicodeButton = this.addButton(new OptionButtonWidget(this.width / 2 - 155, this.height - 38, 150, 20, Option.FORCE_UNICODE_FONT, Option.FORCE_UNICODE_FONT.getDisplayString(this.gameOptions), (button) -> {
             Option.FORCE_UNICODE_FONT.toggle(this.gameOptions);
@@ -62,8 +61,6 @@ public class LanguageOptionsScreenMixin extends GameOptionsScreen {
                             (bl) -> {
                                 if (bl)
                                     setLanguage(languageEntry);
-                                else
-                                    this.client.openScreen(this);
                             }, new TranslatableText("frontported.options.vanilla.confirmLanguageChange"),
                             Text.of("Do you really want to change your game language to " + languageEntry.languageDefinition + "?")
                     ));
@@ -71,6 +68,7 @@ public class LanguageOptionsScreenMixin extends GameOptionsScreen {
                     setLanguage(languageEntry);
                 }
             }
+            this.client.openScreen(this.parent);
         }));
         super.init();
     }
@@ -84,7 +82,6 @@ public class LanguageOptionsScreenMixin extends GameOptionsScreen {
         this.doneButton.setMessage(ScreenTexts.DONE);
         this.forceUnicodeButton.setMessage(Option.FORCE_UNICODE_FONT.getDisplayString(this.gameOptions));
         this.gameOptions.write();
-        this.client.openScreen(this.parent);
     }
     
 }

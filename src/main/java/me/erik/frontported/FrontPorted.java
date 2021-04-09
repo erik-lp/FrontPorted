@@ -3,6 +3,7 @@ package me.erik.frontported;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import me.erik.frontported.config.Config;
+import me.erik.frontported.features.KillSound;
 import me.erik.frontported.features.ToggleSneak;
 import me.erik.frontported.features.ToggleSprint;
 import net.fabricmc.api.ModInitializer;
@@ -41,6 +42,8 @@ public class FrontPorted implements ModInitializer {
         
         ClientTickEvents.START_CLIENT_TICK.register(new ToggleSprint());
         ClientTickEvents.START_CLIENT_TICK.register(new ToggleSneak());
+        
+        KillSound.init();
         
     }
     

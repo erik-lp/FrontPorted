@@ -2,6 +2,8 @@ package me.erik.frontported.mixin;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import me.erik.frontported.FrontPorted;
+import me.erik.frontported.features.KillSound;
+import net.fabricmc.loader.util.StringUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.hud.ChatHud;
@@ -24,25 +26,36 @@ import java.util.Calendar;
 import java.util.Deque;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.regex.Pattern;
 
 @Mixin(ChatHud.class)
 public abstract class ChatHudMixin extends DrawableHelper {
     
+    private static final Pattern vanillaDeathPattern = Pattern.compile(
+            "^(\\w)+ (" +
+                    "(walked into a cactus|drowned|experienced kinetic energy|hit the ground too hard|was impaled on a stalagmite|was squashed by a falling (anvil|block|stalactite)|walked into fire|was burnt to a crisp|was struck by lightning|was killed by magic|starved to death|suffocated in a wall|was poked to death by a sweet berry bush|withered away) whilst (fighting|trying to escape)" +
+                    "|went off with a bang due to a firework fired from .* by" +
+                    "|tried to swim in lava to escape" +
+                    "|was shot by a skull from" +
+                    "|walked into danger zone due to" +
+                    "|was killed trying to hurt" +
+                    "|didn't want to live in the same world as" +
+                    "|was (killed|slain|blown up|shot|pummeled|frozen to death|fireballed|squashed|impaled) by" +
+                    ") .*"
+    );
+    
     @Final
     @Shadow
     private MinecraftClient client;
-    
     @Final
     @Shadow
     private List<ChatHudLine<OrderedText>> visibleMessages;
-    
     @Final
     @Shadow
     private Deque<Text> messageQueue;
     
     @Shadow
     private int scrolledLines;
-    
     @Shadow
     private boolean hasUnreadNewMessages;
     
@@ -73,11 +86,23 @@ public abstract class ChatHudMixin extends DrawableHelper {
         return 0;
     }
     
-    @Inject(at = @At("HEAD"), method = "addMessage(Lnet/minecraft/text/Text;)V", cancellable = true)
-    public void addMessage(Text message, CallbackInfo info) {
+    /**
+     * @reason Chat timestamps; Kill sounds
+     * @author ErikLP
+     */
+    @Overwrite
+    public void addMessage(Text message) {
+        if (vanillaDeathPattern.matcher(message.getString()).matches() && FrontPorted.config.enableKillSound) {
+            try {
+                KillSound.play();
+            } catch (Exception ex) {
+                if (this.client.player != null)
+                    addMessage(Text.of("§c[§6FrontPorted§c] Tried to play a kill sound, but something went wrong! Check your logs fore more info."), 0);
+                ex.printStackTrace();
+            }
+        }
         if (FrontPorted.config.chatTimeStamps) {
             addMessage(Text.of("[" + getTimeStamp() + "] " + message.getString()), 0);
-            info.cancel();
         }
     }
     

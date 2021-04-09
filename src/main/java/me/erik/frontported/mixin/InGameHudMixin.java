@@ -31,9 +31,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Random;
 
-/**
- * Taken from Giz5Mod under MIT license (https://github.com/Toshimichi0915/giz5/blob/master/LICENSE.md)
- */
 @Mixin(InGameHud.class)
 public abstract class InGameHudMixin extends DrawableHelper {
     

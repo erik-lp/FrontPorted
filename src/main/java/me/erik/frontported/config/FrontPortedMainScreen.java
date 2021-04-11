@@ -66,10 +66,19 @@ public final class FrontPortedMainScreen extends Screen {
                 button -> this.client.openScreen(new VanillaOptionsScreen(this))
         ));
         
-        // "Miscellaneous" Button
+        // "BlockOverlay" Button
         this.addButton(new ButtonWidget(
                 this.width / 2 - 75,
                 this.height / 6 + 120,
+                150, 20,
+                new TranslatableText("frontported.main.blockOverlay"),
+                button -> this.client.openScreen(new BlockOverlayOptionsScreen(this))
+        ));
+        
+        // "Miscellaneous" Button
+        this.addButton(new ButtonWidget(
+                this.width / 2 - 75,
+                this.height / 6 + 144,
                 150, 20,
                 new TranslatableText("frontported.main.misc"),
                 button -> this.client.openScreen(new MiscOptionsScreen(this))

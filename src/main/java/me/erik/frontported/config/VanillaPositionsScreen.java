@@ -138,7 +138,21 @@ public final class VanillaPositionsScreen extends GameOptionsScreen {
                     0D, 1080D, 1F,
                     p -> FrontPorted.config.vanilla_hotbar_y,
                     (s, d) -> FrontPorted.config.vanilla_hotbar_y = d,
-                    (s, t) -> new TranslatableText("frontported.options.vanilla.positions.hotbarY", String.format("%.0f", FrontPorted.config.vanilla_hotbar_y)))
+                    (s, t) -> new TranslatableText("frontported.options.vanilla.positions.hotbarY", String.format("%.0f", FrontPorted.config.vanilla_hotbar_y))),
+            
+            new DoubleOption(
+                    "frontported.options.vanilla.positions.chatX",
+                    0D, 1920D, 1F,
+                    p -> FrontPorted.config.vanilla_chat_x,
+                    (s, d) -> FrontPorted.config.vanilla_chat_x = d,
+                    (s, t) -> new TranslatableText("frontported.options.vanilla.positions.chatX", String.format("%.0f", FrontPorted.config.vanilla_chat_x))),
+            
+            new DoubleOption(
+                    "frontported.options.vanilla.positions.chatY",
+                    0D, 1080D, 1F,
+                    p -> FrontPorted.config.vanilla_chat_y,
+                    (s, d) -> FrontPorted.config.vanilla_chat_y = d,
+                    (s, t) -> new TranslatableText("frontported.options.vanilla.positions.chatY", String.format("%.0f", FrontPorted.config.vanilla_chat_y))),
         
     };
     
@@ -161,7 +175,7 @@ public final class VanillaPositionsScreen extends GameOptionsScreen {
         
         this.addButton(new ButtonWidget(
                 this.width / 2 - 100,
-                this.height / 6 + 24 * (this.buttons.size() + 1),
+                this.height / 6 + 24 * (this.buttons.size() / 2 + 1),
                 200, 20,
                 ScreenTexts.DONE,
                 (b) -> onClose()

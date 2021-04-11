@@ -25,17 +25,19 @@ public abstract class FrontPortedOptionsScreen extends GameOptionsScreen {
         if (this.client == null)
             return;
         
+        boolean twoSided = this.options.length > 10;
+        
         for (int i = 0; i < this.options.length; i++) {
             Option option = this.options[i];
-            int x = this.width / 2 - 75;
-            int y = this.height / 6 + (24 * i);
+            int x = twoSided ? this.width / 2 - 155 + i % 2 * 160 : this.width / 2 - 75;
+            int y = twoSided ? this.height / 6 - 12 + 24 * (i >> 1) : this.height / 6 + 24 * i;
             this.addButton(option.createButton(this.client.options, x, y, 150));
         }
         
         if (this instanceof VanillaOptionsScreen) {
             this.addButton(new ButtonWidget(
                     this.width / 2 - 75,
-                    this.height / 6 + 24 * this.buttons.size(),
+                    this.height / 6 + (twoSided ? 12 : 24) * this.buttons.size(),
                     150, 20,
                     new TranslatableText("frontported.options.vanilla.editPositions"),
                     button -> this.client.openScreen(new VanillaPositionsScreen(this))
@@ -44,7 +46,7 @@ public abstract class FrontPortedOptionsScreen extends GameOptionsScreen {
         
         this.addButton(new ButtonWidget(
                 this.width / 2 - 100,
-                this.height / 6 + 24 * (this.buttons.size() + 1),
+                this.height / 6 + (twoSided ? 12 : 24) * (this.buttons.size() + 1),
                 200, 20,
                 ScreenTexts.DONE,
                 (b) -> onClose()

@@ -3,7 +3,6 @@ package me.erik.frontported.mixin;
 import com.mojang.blaze3d.systems.RenderSystem;
 import me.erik.frontported.FrontPorted;
 import me.erik.frontported.features.KillSound;
-import net.fabricmc.loader.util.StringUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.hud.ChatHud;
@@ -17,9 +16,6 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.awt.*;
 import java.util.Calendar;
@@ -27,6 +23,8 @@ import java.util.Deque;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.regex.Pattern;
+
+import static java.awt.Color.HSBtoRGB;
 
 @Mixin(ChatHud.class)
 public abstract class ChatHudMixin extends DrawableHelper {
@@ -86,8 +84,15 @@ public abstract class ChatHudMixin extends DrawableHelper {
         return 0;
     }
     
+    @Shadow
+    public static int getHeight(double heightOption) {
+        return 0;
+    }
+    
+    @Shadow public abstract int getHeight();
+    
     /**
-     * @reason Chat timestamps; Kill sounds
+     * @reason Chat timestamps
      * @author ErikLP
      */
     @Overwrite
@@ -119,7 +124,7 @@ public abstract class ChatHudMixin extends DrawableHelper {
     }
     
     /**
-     * @reason custom chat background
+     * @reason Custom chat background
      * @author ErikLP
      */
     @SuppressWarnings("deprecation")
@@ -130,12 +135,13 @@ public abstract class ChatHudMixin extends DrawableHelper {
             
             if (!this.isChatHidden()) {
                 
-                int backgroundColor = new Color(
-                        (float) FrontPorted.config.customChatRed / 255,
-                        (float) FrontPorted.config.customChatGreen / 255,
-                        (float) FrontPorted.config.customChatBlue / 255,
-                        (float) FrontPorted.config.customChatAlpha / 255
-                ).getRGB();
+                final double chromaSpeed = (100D - MathHelper.clamp(FrontPorted.config.customChatChromaSpeed, 0D, 98D)) / 100D;
+                final double millis = ((float) (System.currentTimeMillis() % 10000L / chromaSpeed) / 10_000F / chromaSpeed);
+                final int c = HSBtoRGB((float) millis, 0.8F, 0.8F);
+                
+                int backgroundColor = FrontPorted.config.customChatChroma ?
+                        ((int) FrontPorted.config.customChatAlpha << 24 & 0xFF000000) + (c & 0xFF0000) + (c & 0xFF00) + (c & 0xFF) :
+                        new Color((float) FrontPorted.config.customChatRed / 255, (float) FrontPorted.config.customChatGreen / 255, (float) FrontPorted.config.customChatBlue / 255, (float) FrontPorted.config.customChatAlpha / 255).getRGB();
                 
                 this.processMessageQueue();
                 
@@ -148,13 +154,13 @@ public abstract class ChatHudMixin extends DrawableHelper {
                     final double chatScale = this.getChatScale();
                     int k = MathHelper.ceil((double) this.getWidth() / chatScale);
                     
-                    RenderSystem.pushMatrix();
-                    RenderSystem.translatef(2F, 8F, 0F);
-                    RenderSystem.scaled(chatScale, chatScale, 1D);
-                    
                     final double chatOpacity = this.client.options.chatOpacity * 0.8999999761581421D + 0.10000000149011612D;
                     final double g = 9D * (this.client.options.chatLineSpacing + 1D);
                     final double h = -8D * (this.client.options.chatLineSpacing + 1D) + 4D * this.client.options.chatLineSpacing;
+                    
+                    RenderSystem.pushMatrix();
+                    RenderSystem.translatef(2F, -310F + (float) (FrontPorted.config.vanilla_chat_y / 1080D * this.client.getWindow().getScaledHeight()) + getHeight(this.client.options.chatHeightUnfocused / (this.client.options.chatLineSpacing + 1D)), 0F);
+                    RenderSystem.scaled(chatScale, chatScale, 1D);
                     
                     int l = 0;
                     
@@ -195,7 +201,14 @@ public abstract class ChatHudMixin extends DrawableHelper {
                                 
                                 int textLength = MinecraftClient.getInstance().textRenderer.getWidth(chatHudLine.getText());
                                 
-                                fill(matrices, -2, (int) (s - g), FrontPorted.config.onlyRenderChatUntilNewline ? (textLength + 2) : (k + 4), (int) s, (int) fillingColor);
+                                fill(
+                                        matrices,
+                                        FrontPorted.config.moveVanillaComponents ? (int) FrontPorted.config.vanilla_chat_x : -2,
+                                        (int) (s - g),
+                                        FrontPorted.config.onlyRenderChatUntilNewline ? (textLength + 2) : (k + 4),
+                                        (int) s,
+                                        (int) fillingColor
+                                );
                                 
                                 RenderSystem.enableBlend();
                                 matrices.translate(0D, 0D, 50D);

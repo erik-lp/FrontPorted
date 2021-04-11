@@ -15,7 +15,8 @@ public class KillSound {
     
     public static final File soundFile = new File("./config/frontported/kill.wav");
     
-    private KillSound() { }
+    private KillSound() {
+    }
     
     public static void play() throws Exception {
         Clip clip = AudioSystem.getClip();
@@ -45,7 +46,7 @@ public class KillSound {
             fileOutputStream.write(fileData);
             fileOutputStream.close();
             
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             System.out.println("Error while trying to download default kill sound!");
             ex.printStackTrace();
         }

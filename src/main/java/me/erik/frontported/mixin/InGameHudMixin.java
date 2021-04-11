@@ -91,12 +91,6 @@ public abstract class InGameHudMixin extends DrawableHelper {
             info.cancel();
     }
     
-    @Inject(at = @At("HEAD"), method = "renderPortalOverlay", cancellable = true)
-    public void renderPortalOverlay(float nauseaStrength, CallbackInfo info) {
-        if (FrontPorted.config.disablePortalNausea)
-            info.cancel();
-    }
-    
     /**
      * @reason Move hotbar
      * @author ErikLP

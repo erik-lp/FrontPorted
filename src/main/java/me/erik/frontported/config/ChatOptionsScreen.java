@@ -17,6 +17,19 @@ public final class ChatOptionsScreen extends FrontPortedOptionsScreen {
                     p -> FrontPorted.config.customChatBackground,
                     (s, b) -> FrontPorted.config.customChatBackground = b),
             
+            new BooleanOption(
+                    "frontported.options.chat.customChatChroma",
+                    new TranslatableText("frontported.options.chat.customChatChroma.desc"),
+                    p -> FrontPorted.config.customChatChroma,
+                    (s, b) -> FrontPorted.config.customChatChroma = b),
+            
+            new DoubleOption(
+                    "frontported.options.chat.customChatChromaSpeed",
+                    0D, 100D, 1F,
+                    p -> FrontPorted.config.customChatChromaSpeed,
+                    (s, d) -> FrontPorted.config.customChatChromaSpeed = d,
+                    (s, t) -> new TranslatableText("frontported.options.chat.customChatChromaSpeed", String.format("%.0f", FrontPorted.config.customChatChromaSpeed))),
+            
             new DoubleOption(
                     "frontported.options.chat.customChatRed",
                     0D, 255D, 1F,

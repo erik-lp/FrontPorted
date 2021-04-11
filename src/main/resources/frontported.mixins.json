@@ -6,13 +6,15 @@
     "mixins": [
         "CameraMixin",
         "ChatHudMixin",
+        "ClientPlayerEntityMixin",
         "GameMenuScreenMixin",
         "GameRendererMixin",
         "InGameHudMixin",
         "InGameOverlayRendererMixin",
         "LanguageOptionsScreenMixin",
         "LivingEntityMixin",
-        "RenderSystemMixin"
+        "RenderSystemMixin",
+        "WorldRendererMixin"
     ],
     "client": [
     ],

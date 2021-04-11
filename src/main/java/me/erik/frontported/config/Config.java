@@ -16,26 +16,40 @@ public class Config {
     public double killSoundVolume;
     
     public boolean fullBright;
-    
     public boolean fastSneaking;
-    
     public boolean disableHurtBobbing;
     public boolean disablePumpkinOverlay;
-    public boolean disablePortalNausea;
-    
+    public boolean disableNausea;
     public double fireOverlayReduction;
     
     public boolean customChatBackground;
+    public boolean customChatChroma;
+    public double customChatChromaSpeed;
     public double customChatRed;
     public double customChatGreen;
     public double customChatBlue;
     public double customChatAlpha;
-    
     public boolean onlyRenderChatUntilNewline;
-    
     public boolean chatTimeStamps;
     public boolean _24hFormat;
     public boolean showSeconds;
+    
+    public boolean enableBlockOverlay;
+    public double blockOverlay_line_thickness;
+    public boolean blockOverlay_line_chroma;
+    public double blockOverlay_line_chromaSpeed;
+    public double blockOverlay_line_red;
+    public double blockOverlay_line_green;
+    public double blockOverlay_line_blue;
+    public double blockOverlay_line_alpha;
+    
+    public boolean blockOverlay_face_enable;
+    public boolean blockOverlay_face_chroma;
+    public double blockOverlay_face_chromaSpeed;
+    public double blockOverlay_face_red;
+    public double blockOverlay_face_green;
+    public double blockOverlay_face_blue;
+    public double blockOverlay_face_alpha;
     
     public boolean doubleCheckDisconnect;
     public boolean doubleCheckLanguageChange;
@@ -60,6 +74,8 @@ public class Config {
     public double vanilla_disconnect_y;
     public double vanilla_hotbar_x;
     public double vanilla_hotbar_y;
+    public double vanilla_chat_x;
+    public double vanilla_chat_y;
     
     public Config() {
         enableToggleSprint = true;
@@ -76,9 +92,11 @@ public class Config {
         fastSneaking = true;
         disableHurtBobbing = true;
         disablePumpkinOverlay = true;
-        disablePortalNausea = true;
+        disableNausea = true;
         fireOverlayReduction = 50D;
         customChatBackground = true;
+        customChatChroma = true;
+        customChatChromaSpeed = 30D;
         customChatRed = 0D;
         customChatGreen = 255D;
         customChatBlue = 255D;
@@ -90,6 +108,7 @@ public class Config {
         doubleCheckDisconnect = false;
         doubleCheckLanguageChange = true;
         disableLinkConfirmation = false;
+        moveVanillaComponents = true;
         vanilla_backToGame_x = 20D;
         vanilla_backToGame_y = 20D;
         vanilla_advancements_x = 20D;
@@ -108,6 +127,23 @@ public class Config {
         vanilla_disconnect_y = 340D;
         vanilla_hotbar_x = 1360;
         vanilla_hotbar_y = 1000;
+        vanilla_chat_x = 0D;
+        vanilla_chat_y = 600D;
+        enableBlockOverlay = true;
+        blockOverlay_line_thickness = 40D;
+        blockOverlay_line_chroma = true;
+        blockOverlay_line_chromaSpeed = 50D;
+        blockOverlay_line_red = 255D;
+        blockOverlay_line_green = 255D;
+        blockOverlay_line_blue = 255D;
+        blockOverlay_line_alpha = 255D;
+        blockOverlay_face_enable = true;
+        blockOverlay_face_chroma = true;
+        blockOverlay_face_chromaSpeed = 50D;
+        blockOverlay_face_red = 255D;
+        blockOverlay_face_green = 255D;
+        blockOverlay_face_blue = 255D;
+        blockOverlay_face_alpha = 128D;
     }
     
 }

@@ -5,10 +5,10 @@ FrontPorted is a fabric mod for 1.16.5 that "front-ports" features from older mo
 - ToggleSprint
 - ToggleSneak
 - FullBright
+- Block Overlay
 - Better Animations
 - Chat Timestamps
+- Kill Sounds
 - Better Chat Background
-- Kill Sound (planned)
 - KeyStrokes (planned)
-- OptiFine Zoom Scrolling (planned)
 - ...

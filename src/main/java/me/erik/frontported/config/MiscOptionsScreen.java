@@ -35,6 +35,12 @@ public final class MiscOptionsScreen extends FrontPortedOptionsScreen {
                     p -> FrontPorted.config.disablePumpkinOverlay,
                     (s, b) -> FrontPorted.config.disablePumpkinOverlay = b),
             
+            new BooleanOption(
+                    "frontported.options.misc.disableNausea",
+                    new TranslatableText("frontported.options.misc.disableNausea.desc"),
+                    p -> FrontPorted.config.disableNausea,
+                    (s, b) -> FrontPorted.config.disableNausea = b),
+            
             new DoubleOption(
                     "frontported.options.misc.fireReduction",
                     0D, 100D, 0.5F,

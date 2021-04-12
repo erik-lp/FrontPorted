@@ -4,7 +4,6 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import me.erik.frontported.FrontPorted;
 import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.client.util.math.Vector4f;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Matrix4f;
@@ -25,19 +24,14 @@ public abstract class WorldRendererMixin {
     @Overwrite
     private static void drawShapeOutline(MatrixStack matrixStack, VertexConsumer vertexConsumer, VoxelShape voxelShape, double d, double e, double f, float r, float g, float b, float a) {
         
-        final double chromaSpeed = (100D - MathHelper.clamp(FrontPorted.config.blockOverlay_line_chromaSpeed, 0D, 98D)) / 100D;
+        final double chromaSpeed = (100D - MathHelper.clamp(FrontPorted.config.blockOverlay_chromaSpeed, 0D, 98D)) / 100D;
         final double millis = ((float) ((System.currentTimeMillis() % 10000L) / chromaSpeed) / 10_000F / chromaSpeed);
         final int color = HSBtoRGB((float) millis, 0.8F, 0.8F);
         
-        final float lineRed = FrontPorted.config.enableBlockOverlay ? (FrontPorted.config.blockOverlay_line_chroma ? (((color >> 16) & 255) / 255F) : ((float) FrontPorted.config.blockOverlay_line_red / 255F)) : r;
-        final float lineGreen = FrontPorted.config.enableBlockOverlay ? (FrontPorted.config.blockOverlay_line_chroma ? (((color >> 8) & 255) / 255F) : ((float) FrontPorted.config.blockOverlay_line_green / 255F)) : g;
-        final float lineBlue = FrontPorted.config.enableBlockOverlay ? (FrontPorted.config.blockOverlay_line_chroma ? ((color & 255) / 255F) : ((float) FrontPorted.config.blockOverlay_line_blue / 255F)) : b;
-        final float lineAlpha = FrontPorted.config.enableBlockOverlay ? ((float) FrontPorted.config.blockOverlay_line_alpha / 255) : a;
-        
-        final float faceRed = FrontPorted.config.blockOverlay_face_chroma ? (((color >> 16) & 255) / 255F) : ((float) FrontPorted.config.blockOverlay_face_red / 255F);
-        final float faceGreen = FrontPorted.config.blockOverlay_face_chroma ? (((color >> 8) & 255) / 255F) : ((float) FrontPorted.config.blockOverlay_face_green / 255F);
-        final float faceBlue = FrontPorted.config.blockOverlay_face_chroma ? ((color & 255) / 255F) : ((float) FrontPorted.config.blockOverlay_face_blue / 255F);
-        final float faceAlpha = (float) FrontPorted.config.blockOverlay_face_alpha / 255;
+        final float lineRed = FrontPorted.config.enableBlockOverlay ? (FrontPorted.config.blockOverlay_chroma ? (((color >> 16) & 255) / 255F) : ((float) FrontPorted.config.blockOverlay_red / 255F)) : r;
+        final float lineGreen = FrontPorted.config.enableBlockOverlay ? (FrontPorted.config.blockOverlay_chroma ? (((color >> 8) & 255) / 255F) : ((float) FrontPorted.config.blockOverlay_green / 255F)) : g;
+        final float lineBlue = FrontPorted.config.enableBlockOverlay ? (FrontPorted.config.blockOverlay_chroma ? ((color & 255) / 255F) : ((float) FrontPorted.config.blockOverlay_blue / 255F)) : b;
+        final float lineAlpha = FrontPorted.config.enableBlockOverlay ? ((float) FrontPorted.config.blockOverlay_alpha / 255) : a;
         
         final Matrix4f matrix4f = matrixStack.peek().getModel();
         voxelShape.forEachEdge((k, l, m, n, o, p) -> {

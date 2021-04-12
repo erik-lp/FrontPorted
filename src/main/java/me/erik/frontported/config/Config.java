@@ -36,21 +36,13 @@ public class Config {
     public boolean showSeconds;
     
     public boolean enableBlockOverlay;
-    public double blockOverlay_line_thickness;
-    public boolean blockOverlay_line_chroma;
-    public double blockOverlay_line_chromaSpeed;
-    public double blockOverlay_line_red;
-    public double blockOverlay_line_green;
-    public double blockOverlay_line_blue;
-    public double blockOverlay_line_alpha;
-    
-    public boolean blockOverlay_face_enable;
-    public boolean blockOverlay_face_chroma;
-    public double blockOverlay_face_chromaSpeed;
-    public double blockOverlay_face_red;
-    public double blockOverlay_face_green;
-    public double blockOverlay_face_blue;
-    public double blockOverlay_face_alpha;
+    public double blockOverlay_thickness;
+    public boolean blockOverlay_chroma;
+    public double blockOverlay_chromaSpeed;
+    public double blockOverlay_red;
+    public double blockOverlay_green;
+    public double blockOverlay_blue;
+    public double blockOverlay_alpha;
     
     public boolean doubleCheckDisconnect;
     public boolean doubleCheckLanguageChange;
@@ -132,20 +124,13 @@ public class Config {
         this.vanilla_chat_x = 0D;
         this.vanilla_chat_y = 600D;
         this.enableBlockOverlay = true;
-        this.blockOverlay_line_thickness = 40D;
-        this.blockOverlay_line_chroma = true;
-        this.blockOverlay_line_chromaSpeed = 50D;
-        this.blockOverlay_line_red = 255D;
-        this.blockOverlay_line_green = 255D;
-        this.blockOverlay_line_blue = 255D;
-        this.blockOverlay_line_alpha = 255D;
-        this.blockOverlay_face_enable = true;
-        this.blockOverlay_face_chroma = true;
-        this.blockOverlay_face_chromaSpeed = 50D;
-        this.blockOverlay_face_red = 255D;
-        this.blockOverlay_face_green = 255D;
-        this.blockOverlay_face_blue = 255D;
-        this.blockOverlay_face_alpha = 128D;
+        this.blockOverlay_thickness = 40D;
+        this.blockOverlay_chroma = true;
+        this.blockOverlay_chromaSpeed = 50D;
+        this.blockOverlay_red = 255D;
+        this.blockOverlay_green = 255D;
+        this.blockOverlay_blue = 255D;
+        this.blockOverlay_alpha = 255D;
     }
     
 }

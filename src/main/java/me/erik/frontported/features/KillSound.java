@@ -19,10 +19,10 @@ public class KillSound {
     }
     
     public static void play() throws Exception {
-        Clip clip = AudioSystem.getClip();
+        final Clip clip = AudioSystem.getClip();
         clip.open(AudioSystem.getAudioInputStream(soundFile));
-        FloatControl control = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-        control.setValue(control.getMinimum() + (control.getMaximum() - control.getMinimum() * (int) FrontPorted.config.killSoundVolume / 100));
+        final FloatControl control = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+        control.setValue(control.getMinimum() + (control.getMaximum() - ((control.getMinimum() * (int) FrontPorted.config.killSoundVolume) / 100)));
         clip.start();
     }
     
@@ -33,16 +33,16 @@ public class KillSound {
         
         try {
             
-            URLConnection connection = new URL("https://oofmodsound.powns.dev/oof.wav").openConnection();
-            DataInputStream dataInputStream = new DataInputStream(connection.getInputStream());
-            byte[] fileData = new byte[connection.getContentLength()];
+            final URLConnection connection = new URL("https://oofmodsound.powns.dev/oof.wav").openConnection();
+            final DataInputStream dataInputStream = new DataInputStream(connection.getInputStream());
+            final byte[] fileData = new byte[connection.getContentLength()];
             
             for (int i = 0; i < fileData.length; i++)
                 fileData[i] = dataInputStream.readByte();
             
             dataInputStream.close();
             
-            FileOutputStream fileOutputStream = new FileOutputStream(soundFile);
+            final FileOutputStream fileOutputStream = new FileOutputStream(soundFile);
             fileOutputStream.write(fileData);
             fileOutputStream.close();
             

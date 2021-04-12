@@ -29,8 +29,8 @@ public class CameraMixin {
     public void updateEyeHeight(CallbackInfo info) {
         if (FrontPorted.config.fastSneaking) {
             if (this.focusedEntity != null) {
-                lastCameraY = cameraY;
-                cameraY = focusedEntity.getStandingEyeHeight();
+                this.lastCameraY = this.cameraY;
+                this.cameraY = this.focusedEntity.getStandingEyeHeight();
             }
             info.cancel();
         }

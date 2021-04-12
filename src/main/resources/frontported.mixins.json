@@ -4,6 +4,7 @@
     "package": "me.erik.frontported.mixin",
     "compatibilityLevel": "JAVA_8",
     "mixins": [
+        "AbstractInventoryScreenMixin",
         "CameraMixin",
         "ChatHudMixin",
         "ClientPlayerEntityMixin",

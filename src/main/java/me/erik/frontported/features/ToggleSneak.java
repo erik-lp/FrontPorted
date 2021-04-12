@@ -7,7 +7,7 @@ import net.minecraft.client.MinecraftClient;
 public class ToggleSneak implements ClientTickEvents.StartTick {
     
     private boolean lastPressed;
-    public static boolean sneaking = false;
+    public static boolean sneaking;
     
     @Override
     public void onStartTick(MinecraftClient client) {
@@ -15,13 +15,13 @@ public class ToggleSneak implements ClientTickEvents.StartTick {
             return;
         if (!FrontPorted.config.enableToggleSneak)
             return;
-        boolean pressed = FrontPorted.TOGGLE_SNEAK_KEY.isPressed();
-        if (pressed && !lastPressed) {
+        final boolean pressed = FrontPorted.TOGGLE_SNEAK_KEY.isPressed();
+        if (pressed && !this.lastPressed) {
             sneaking = !sneaking;
             if (!sneaking)
                 client.options.keySneak.setPressed(false);
         }
-        lastPressed = pressed;
+        this.lastPressed = pressed;
         if (sneaking)
             client.options.keySneak.setPressed(true);
     }

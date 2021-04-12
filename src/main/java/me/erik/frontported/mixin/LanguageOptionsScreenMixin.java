@@ -47,26 +47,24 @@ public class LanguageOptionsScreenMixin extends GameOptionsScreen {
             return;
         this.languageSelectionList = ((LanguageOptionsScreen) (Object) (this)).new LanguageSelectionListWidget(this.client);
         this.children.add(this.languageSelectionList);
-        this.forceUnicodeButton = this.addButton(new OptionButtonWidget(this.width / 2 - 155, this.height - 38, 150, 20, Option.FORCE_UNICODE_FONT, Option.FORCE_UNICODE_FONT.getDisplayString(this.gameOptions), (button) -> {
+        this.forceUnicodeButton = this.addButton(new OptionButtonWidget((this.width / 2) - 155, this.height - 38, 150, 20, Option.FORCE_UNICODE_FONT, Option.FORCE_UNICODE_FONT.getDisplayString(this.gameOptions), (button) -> {
             Option.FORCE_UNICODE_FONT.toggle(this.gameOptions);
             this.gameOptions.write();
             button.setMessage(Option.FORCE_UNICODE_FONT.getDisplayString(this.gameOptions));
             this.client.onResolutionChanged();
         }));
-        this.doneButton = this.addButton(new ButtonWidget(this.width / 2 - 155 + 160, this.height - 38, 150, 20, ScreenTexts.DONE, (button) -> {
-            LanguageOptionsScreen.LanguageSelectionListWidget.LanguageEntry languageEntry = this.languageSelectionList.getSelected();
-            if (languageEntry != null && !languageEntry.languageDefinition.getCode().equals(this.languageManager.getLanguage().getCode())) {
-                if (FrontPorted.config.doubleCheckLanguageChange) {
+        this.doneButton = this.addButton(new ButtonWidget(((this.width / 2) - 155) + 160, this.height - 38, 150, 20, ScreenTexts.DONE, (button) -> {
+            final LanguageOptionsScreen.LanguageSelectionListWidget.LanguageEntry languageEntry = this.languageSelectionList.getSelected();
+            if ((languageEntry != null) && !languageEntry.languageDefinition.getCode().equals(this.languageManager.getLanguage().getCode())) {
+                if (FrontPorted.config.doubleCheckLanguageChange)
                     this.client.openScreen(new ConfirmScreen(
                             (bl) -> {
                                 if (bl)
-                                    setLanguage(languageEntry);
-                            }, new TranslatableText("frontported.options.vanilla.confirmLanguageChange"),
+                                    this.setLanguage(languageEntry);
+                                }, new TranslatableText("frontported.options.vanilla.confirmLanguageChange"),
                             Text.of("Do you really want to change your game language to " + languageEntry.languageDefinition + "?")
                     ));
-                } else {
-                    setLanguage(languageEntry);
-                }
+                else this.setLanguage(languageEntry);
             }
             this.client.openScreen(this.parent);
         }));

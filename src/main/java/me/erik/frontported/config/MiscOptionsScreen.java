@@ -41,6 +41,12 @@ public final class MiscOptionsScreen extends FrontPortedOptionsScreen {
                     p -> FrontPorted.config.disableNausea,
                     (s, b) -> FrontPorted.config.disableNausea = b),
             
+            new BooleanOption(
+                    "frontported.options.misc.disableInventoryOffset",
+                    new TranslatableText("frontported.options.misc.disableInventoryOffset.desc"),
+                    p -> FrontPorted.config.disableInventoryOffset,
+                    (s, b) -> FrontPorted.config.disableInventoryOffset = b),
+            
             new DoubleOption(
                     "frontported.options.misc.fireReduction",
                     0D, 100D, 0.5F,

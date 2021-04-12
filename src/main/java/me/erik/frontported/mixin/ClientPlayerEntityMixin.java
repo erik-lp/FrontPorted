@@ -26,8 +26,8 @@ public class ClientPlayerEntityMixin extends AbstractClientPlayerEntity {
     @Inject(at = @At("HEAD"), method = "tick")
     public void tick(CallbackInfo info) {
         if (FrontPorted.config.disableNausea) {
-            this.nextNauseaStrength = 0F;
-            this.lastNauseaStrength = 0F;
+            this.nextNauseaStrength = 0.0f;
+            this.lastNauseaStrength = 0.0f;
         }
     }
     

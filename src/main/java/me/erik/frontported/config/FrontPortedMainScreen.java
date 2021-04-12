@@ -23,7 +23,7 @@ public final class FrontPortedMainScreen extends Screen {
         
         // "ToggleSprint" Button
         this.addButton(new ButtonWidget(
-                this.width / 2 - 75,
+                (this.width / 2) - 75,
                 this.height / 6,
                 150, 20,
                 new TranslatableText("frontported.main.toggleSprint"),
@@ -32,8 +32,8 @@ public final class FrontPortedMainScreen extends Screen {
         
         // "ToggleSneak" Button
         this.addButton(new ButtonWidget(
-                this.width / 2 - 75,
-                this.height / 6 + 24,
+                (this.width / 2) - 75,
+                (this.height / 6) + 24,
                 150, 20,
                 new TranslatableText("frontported.main.toggleSneak"),
                 button -> this.client.openScreen(new ToggleSneakOptionsScreen(this))
@@ -41,8 +41,8 @@ public final class FrontPortedMainScreen extends Screen {
         
         // "Kill Sounds" Button
         this.addButton(new ButtonWidget(
-                this.width / 2 - 75,
-                this.height / 6 + 48,
+                (this.width / 2) - 75,
+                (this.height / 6) + 48,
                 150, 20,
                 new TranslatableText("frontported.main.killSounds"),
                 button -> this.client.openScreen(new KillSoundsOptionsScreen(this))
@@ -50,8 +50,8 @@ public final class FrontPortedMainScreen extends Screen {
         
         // "Chat" Button
         this.addButton(new ButtonWidget(
-                this.width / 2 - 75,
-                this.height / 6 + 72,
+                (this.width / 2) - 75,
+                (this.height / 6) + 72,
                 150, 20,
                 new TranslatableText("frontported.main.chat"),
                 button -> this.client.openScreen(new ChatOptionsScreen(this))
@@ -59,8 +59,8 @@ public final class FrontPortedMainScreen extends Screen {
         
         // "Vanilla" Button
         this.addButton(new ButtonWidget(
-                this.width / 2 - 75,
-                this.height / 6 + 96,
+                (this.width / 2) - 75,
+                (this.height / 6) + 96,
                 150, 20,
                 new TranslatableText("frontported.main.vanilla"),
                 button -> this.client.openScreen(new VanillaOptionsScreen(this))
@@ -68,8 +68,8 @@ public final class FrontPortedMainScreen extends Screen {
         
         // "BlockOverlay" Button
         this.addButton(new ButtonWidget(
-                this.width / 2 - 75,
-                this.height / 6 + 120,
+                (this.width / 2) - 75,
+                (this.height / 6) + 120,
                 150, 20,
                 new TranslatableText("frontported.main.blockOverlay"),
                 button -> this.client.openScreen(new BlockOverlayOptionsScreen(this))
@@ -77,8 +77,8 @@ public final class FrontPortedMainScreen extends Screen {
         
         // "Miscellaneous" Button
         this.addButton(new ButtonWidget(
-                this.width / 2 - 75,
-                this.height / 6 + 144,
+                (this.width / 2) - 75,
+                (this.height / 6) + 144,
                 150, 20,
                 new TranslatableText("frontported.main.misc"),
                 button -> this.client.openScreen(new MiscOptionsScreen(this))
@@ -86,18 +86,18 @@ public final class FrontPortedMainScreen extends Screen {
         
         // "Done" Button
         this.addButton(new ButtonWidget(
-                this.width / 2 - 100,
-                this.height / 6 + 24 * (this.buttons.size() + 1),
+                (this.width / 2) - 100,
+                (this.height / 6) + (24 * (this.buttons.size() + 1)),
                 200, 20,
                 ScreenTexts.DONE,
-                (b) -> onClose()
+                (b) -> this.onClose()
         ));
         
     }
     
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        renderBackground(matrices);
+        this.renderBackground(matrices);
         drawCenteredText(matrices, this.textRenderer, this.title, this.width / 2, 20, 16777215);
         super.render(matrices, mouseX, mouseY, delta);
     }
@@ -105,7 +105,7 @@ public final class FrontPortedMainScreen extends Screen {
     @Override
     public void onClose() {
         if (this.client != null)
-            this.client.openScreen(parent);
+            this.client.openScreen(this.parent);
         else
             super.onClose();
     }

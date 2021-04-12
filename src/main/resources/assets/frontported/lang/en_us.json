@@ -107,5 +107,7 @@
     "frontported.options.misc.disablePumpkinOverlay.desc": "Disables the pumpkin overlay that is usually rendered when wearing a carved pumpkin.",
     "frontported.options.misc.disableNausea": "Disable Nausea",
     "frontported.options.misc.disableNausea.desc": "Disables the nausea status effect (and the nether portal effect).",
+    "frontported.options.misc.disableInventoryOffset": "Disable Inventory Potion Offset",
+    "frontported.options.misc.disableInventoryOffset.desc": "Disables the inventory moving to the right when having active potion effects.",
     "frontported.options.misc.fireReduction": "Fire Overlay Reduction: %f%%"
 }

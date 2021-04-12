@@ -29,7 +29,7 @@ public class FrontPorted implements ModInitializer {
     @Override
     public void onInitialize() {
         
-        File modDir = new File("config/frontported");
+        final File modDir = new File("config/frontported");
         if (!modDir.exists())
             //noinspection ResultOfMethodCallIgnored
             modDir.mkdirs();
@@ -52,18 +52,17 @@ public class FrontPorted implements ModInitializer {
      * @author Toshimichi0915
      */
     public static void loadConfig() {
-        if (configFile.exists()) {
+        if (configFile.exists())
             try {
-                String text = FileUtils.readFileToString(configFile, StandardCharsets.UTF_8);
+                final String text = FileUtils.readFileToString(configFile, StandardCharsets.UTF_8);
                 config = gson.fromJson(text, Config.class);
             } catch (IOException e) {
                 e.printStackTrace();
                 // If something goes wrong, renew config file
                 config = new Config();
             }
-        } else {
+        else
             config = new Config();
-        }
     }
     
     /**

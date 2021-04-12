@@ -19,13 +19,13 @@ public class ToggleSprint implements ClientTickEvents.StartTick {
             return;
         if (!FrontPorted.config.enableToggleSprint)
             return;
-        boolean pressed = FrontPorted.TOGGLE_SPRINT_KEY.isPressed();
-        if (pressed && !lastPressed) {
+        final boolean pressed = FrontPorted.TOGGLE_SPRINT_KEY.isPressed();
+        if (pressed && !this.lastPressed) {
             sprinting = !sprinting;
             if (!sprinting)
                 client.options.keySprint.setPressed(false);
         }
-        lastPressed = pressed;
+        this.lastPressed = pressed;
         if (sprinting)
             client.options.keySprint.setPressed(true);
     }

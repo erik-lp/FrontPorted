@@ -8,6 +8,7 @@ import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.TranslatableText;
+import org.lwjgl.opengl.GL11;
 
 /**
  * Taken from Giz5Mod under MIT license (https://github.com/Toshimichi0915/giz5/blob/master/LICENSE.md)
@@ -17,20 +18,20 @@ public class ToggleSprintHud extends DrawableHelper {
     
     public void render(MatrixStack stack) {
         
-        MinecraftClient client = MinecraftClient.getInstance();
-        TextRenderer renderer = client.textRenderer;
+        final MinecraftClient client = MinecraftClient.getInstance();
+        final TextRenderer renderer = client.textRenderer;
         client.getProfiler().push("toggleSprint");
-        RenderSystem.pushMatrix();
+        GL11.glPushMatrix();
         
-        float x = (float) (FrontPorted.config.toggleSprint_x / 1920D * MinecraftClient.getInstance().getWindow().getScaledWidth());
-        float y = (float) (FrontPorted.config.toggleSprint_y / 1080D * MinecraftClient.getInstance().getWindow().getScaledHeight());
+        final float x = (float) ((FrontPorted.config.toggleSprint_x / 1920D) * MinecraftClient.getInstance().getWindow().getScaledWidth());
+        final float y = (float) ((FrontPorted.config.toggleSprint_y / 1080D) * MinecraftClient.getInstance().getWindow().getScaledHeight());
         
         if (ToggleSprint.sprinting) {
-            String toggleSprintEnabled = new TranslatableText("Sprinting [Toggled]").getString();
+            final String toggleSprintEnabled = new TranslatableText("Sprinting [Toggled]").getString();
             renderer.drawWithShadow(stack, toggleSprintEnabled, x, y, 0xFFFFFF);
         }
         
-        RenderSystem.popMatrix();
+        GL11.glPopMatrix();
         client.getProfiler().pop();
         
     }

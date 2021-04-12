@@ -35,8 +35,8 @@ public class GameMenuScreenMixin extends Screen {
     private void initWidgets() {
         
         this.addButton(new ButtonWidget(
-                FrontPorted.config.moveVanillaComponents ? (int) (FrontPorted.config.vanilla_backToGame_x / 1920D * this.width) : this.width / 2 - 102,
-                FrontPorted.config.moveVanillaComponents ? (int) (FrontPorted.config.vanilla_backToGame_y / 1080D * this.height) : this.height / 4 + 8,
+                FrontPorted.config.moveVanillaComponents ? (int) ((FrontPorted.config.vanilla_backToGame_x / 1920D) * this.width) : ((this.width / 2) - 102),
+                FrontPorted.config.moveVanillaComponents ? (int) ((FrontPorted.config.vanilla_backToGame_y / 1080D) * this.height) : ((this.height / 4) + 8),
                 204, 20,
                 new TranslatableText("menu.returnToGame"),
                 (buttonWidgetx) -> {
@@ -46,25 +46,25 @@ public class GameMenuScreenMixin extends Screen {
         ));
         
         this.addButton(new ButtonWidget(
-                FrontPorted.config.moveVanillaComponents ? (int) (FrontPorted.config.vanilla_advancements_x / 1920D * this.width) : this.width / 2 - 102,
-                FrontPorted.config.moveVanillaComponents ? (int) (FrontPorted.config.vanilla_advancements_y / 1080D * this.height) : this.height / 4 + 32,
+                FrontPorted.config.moveVanillaComponents ? (int) ((FrontPorted.config.vanilla_advancements_x / 1920D) * this.width) : ((this.width / 2) - 102),
+                FrontPorted.config.moveVanillaComponents ? (int) ((FrontPorted.config.vanilla_advancements_y / 1080D) * this.height) : ((this.height / 4) + 32),
                 98, 20,
                 new TranslatableText("gui.advancements"),
                 (buttonWidgetx) -> this.client.openScreen(new AdvancementsScreen(this.client.player.networkHandler.getAdvancementHandler()))
         ));
         
         this.addButton(new ButtonWidget(
-                FrontPorted.config.moveVanillaComponents ? (int) (FrontPorted.config.vanilla_stats_x / 1920D * this.width) : this.width / 2 + 4,
-                FrontPorted.config.moveVanillaComponents ? (int) (FrontPorted.config.vanilla_stats_y / 1080D * this.height) : this.height / 4 + 32,
+                FrontPorted.config.moveVanillaComponents ? (int) ((FrontPorted.config.vanilla_stats_x / 1920D) * this.width) : ((this.width / 2) + 4),
+                FrontPorted.config.moveVanillaComponents ? (int) ((FrontPorted.config.vanilla_stats_y / 1080D) * this.height) : ((this.height / 4) + 32),
                 98, 20,
                 new TranslatableText("gui.stats"),
                 (buttonWidgetx) -> this.client.openScreen(new StatsScreen(this, this.client.player.getStatHandler()))
         ));
         
-        String link = SharedConstants.getGameVersion().isStable() ? "https://aka.ms/javafeedback?ref=game" : "https://aka.ms/snapshotfeedback?ref=game";
+        final String link = SharedConstants.getGameVersion().isStable() ? "https://aka.ms/javafeedback?ref=game" : "https://aka.ms/snapshotfeedback?ref=game";
         this.addButton(new ButtonWidget(
-                FrontPorted.config.moveVanillaComponents ? (int) (FrontPorted.config.vanilla_sendFeedback_x / 1920D * this.width) : this.width / 2 - 102,
-                FrontPorted.config.moveVanillaComponents ? (int) (FrontPorted.config.vanilla_sendFeedback_y / 1080D * this.height) : this.height / 4 + 56,
+                FrontPorted.config.moveVanillaComponents ? (int) ((FrontPorted.config.vanilla_sendFeedback_x / 1920D) * this.width) : ((this.width / 2) - 102),
+                FrontPorted.config.moveVanillaComponents ? (int) ((FrontPorted.config.vanilla_sendFeedback_y / 1080D) * this.height) : ((this.height / 4) + 56),
                 98, 20,
                 new TranslatableText("menu.sendFeedback"),
                 (buttonWidgetx) -> {
@@ -84,8 +84,8 @@ public class GameMenuScreenMixin extends Screen {
         ));
         
         this.addButton(new ButtonWidget(
-                FrontPorted.config.moveVanillaComponents ? (int) (FrontPorted.config.vanilla_reportBugs_x / 1920D * this.width) : this.width / 2 + 4,
-                FrontPorted.config.moveVanillaComponents ? (int) (FrontPorted.config.vanilla_reportBugs_y / 1080D * this.height) : this.height / 4 + 56,
+                FrontPorted.config.moveVanillaComponents ? (int) ((FrontPorted.config.vanilla_reportBugs_x / 1920D) * this.width) : ((this.width / 2) + 4),
+                FrontPorted.config.moveVanillaComponents ? (int) ((FrontPorted.config.vanilla_reportBugs_y / 1080D) * this.height) : ((this.height / 4) + 56),
                 98, 20,
                 new TranslatableText("menu.reportBugs"),
                 (buttonWidgetx) -> {
@@ -106,16 +106,16 @@ public class GameMenuScreenMixin extends Screen {
         ));
         
         this.addButton(new ButtonWidget(
-                FrontPorted.config.moveVanillaComponents ? (int) (FrontPorted.config.vanilla_options_x / 1920D * this.width) : this.width / 2 - 102,
-                FrontPorted.config.moveVanillaComponents ? (int) (FrontPorted.config.vanilla_options_y / 1080D * this.height) : this.height / 4 + 80,
+                FrontPorted.config.moveVanillaComponents ? (int) ((FrontPorted.config.vanilla_options_x / 1920D) * this.width) : ((this.width / 2) - 102),
+                FrontPorted.config.moveVanillaComponents ? (int) ((FrontPorted.config.vanilla_options_y / 1080D) * this.height) : ((this.height / 4) + 80),
                 98, 20,
                 new TranslatableText("menu.options"),
                 (buttonWidgetx) -> this.client.openScreen(new OptionsScreen(this, this.client.options))
         ));
         
-        ButtonWidget buttonWidget = this.addButton(new ButtonWidget(
-                FrontPorted.config.moveVanillaComponents ? (int) (FrontPorted.config.vanilla_shareToLan_x / 1920D * this.width) : this.width / 2 + 4,
-                FrontPorted.config.moveVanillaComponents ? (int) (FrontPorted.config.vanilla_shareToLan_y / 1080D * this.height) : this.height / 4 + 80,
+        final ButtonWidget buttonWidget = this.addButton(new ButtonWidget(
+                FrontPorted.config.moveVanillaComponents ? (int) ((FrontPorted.config.vanilla_shareToLan_x / 1920D) * this.width) : ((this.width / 2) + 4),
+                FrontPorted.config.moveVanillaComponents ? (int) ((FrontPorted.config.vanilla_shareToLan_y / 1080D) * this.height) : ((this.height / 4) + 80),
                 98, 20,
                 new TranslatableText("menu.shareToLan"),
                 (buttonWidgetx) -> this.client.openScreen(new OpenToLanScreen(this))
@@ -123,42 +123,38 @@ public class GameMenuScreenMixin extends Screen {
         
         buttonWidget.active = this.client.isIntegratedServerRunning() && !this.client.getServer().isRemote();
         
-        ButtonWidget buttonWidget2 = this.addButton(new ButtonWidget(
-                FrontPorted.config.moveVanillaComponents ? (int) (FrontPorted.config.vanilla_disconnect_x / 1920D * this.width) : this.width / 2 - 102,
-                FrontPorted.config.moveVanillaComponents ? (int) (FrontPorted.config.vanilla_disconnect_y / 1080D * this.height) : this.height / 4 + 104,
+        final ButtonWidget buttonWidget2 = this.addButton(new ButtonWidget(
+                FrontPorted.config.moveVanillaComponents ? (int) ((FrontPorted.config.vanilla_disconnect_x / 1920D) * this.width) : ((this.width / 2) - 102),
+                FrontPorted.config.moveVanillaComponents ? (int) ((FrontPorted.config.vanilla_disconnect_y / 1080D) * this.height) : ((this.height / 4) + 104),
                 204, 20,
                 new TranslatableText("menu.returnToMenu"),
                 (buttonWidgetx) -> {
                     
-                    boolean singlePlayer = this.client.isInSingleplayer();
-                    boolean realms = this.client.isConnectedToRealms();
+                    final boolean singlePlayer = this.client.isInSingleplayer();
+                    final boolean realms = this.client.isConnectedToRealms();
                     
-                    if (!FrontPorted.config.doubleCheckDisconnect) {
-                        disconnect(singlePlayer, realms, buttonWidgetx);
-                    } else {
-                        if (disconnectConfirmation.isChecked()) {
-                            disconnect(singlePlayer, realms, buttonWidgetx);
-                        } else {
-                            this.client.player.playSound(SoundEvents.BLOCK_NOTE_BLOCK_BASS, 1F, 0.5F);
-                        }
-                    }
+                    if (!FrontPorted.config.doubleCheckDisconnect)
+                        this.disconnect(singlePlayer, realms, buttonWidgetx);
+                    else if (this.disconnectConfirmation.isChecked())
+                        this.disconnect(singlePlayer, realms, buttonWidgetx);
+                    else
+                        this.client.player.playSound(SoundEvents.BLOCK_NOTE_BLOCK_BASS, 1F, 0.5F);
                     
                 }
         ));
         
-        if (!this.client.isInSingleplayer()) {
+        if (!this.client.isInSingleplayer())
             buttonWidget2.setMessage(new TranslatableText("menu.disconnect"));
-        }
         
         if (FrontPorted.config.doubleCheckDisconnect) {
-            disconnectConfirmation = new CheckboxWidget(
-                    FrontPorted.config.moveVanillaComponents ? (int) (FrontPorted.config.vanilla_disconnect_x / 1920D * this.width) + 212 : this.width / 2 + 110,
-                    FrontPorted.config.moveVanillaComponents ? (int) (FrontPorted.config.vanilla_disconnect_y / 1080D * this.height) : this.height / 4 + 104,
+            this.disconnectConfirmation = new CheckboxWidget(
+                    FrontPorted.config.moveVanillaComponents ? ((int) ((FrontPorted.config.vanilla_disconnect_x / 1920D) * this.width) + 212) : ((this.width / 2) + 110),
+                    FrontPorted.config.moveVanillaComponents ? (int) ((FrontPorted.config.vanilla_disconnect_y / 1080D) * this.height) : ((this.height / 4) + 104),
                     20, 20,
                     Text.of(""),
                     false
             );
-            this.addButton(disconnectConfirmation);
+            this.addButton(this.disconnectConfirmation);
         }
         
         this.addButton(new ButtonWidget(
@@ -173,7 +169,7 @@ public class GameMenuScreenMixin extends Screen {
     
     private void disconnect(boolean singlePlayer, boolean realms, ButtonWidget widgetIn) {
         
-        if (this.client == null || this.client.world == null)
+        if ((this.client == null) || (this.client.world == null))
             return;
         
         widgetIn.active = false;

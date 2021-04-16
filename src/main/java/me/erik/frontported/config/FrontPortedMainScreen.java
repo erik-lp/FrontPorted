@@ -27,61 +27,83 @@ public final class FrontPortedMainScreen extends Screen {
                 this.height / 6,
                 150, 20,
                 new TranslatableText("frontported.main.toggleSprint"),
-                button -> this.client.openScreen(new ToggleSprintOptionsScreen(this))
+                button -> this.client.openScreen(new FrontPortedOptionsScreen(this, new TranslatableText("frontported.main.toggleSprint"), Config.Category.TOGGLE_SPRINT){})
         ));
         
         // "ToggleSneak" Button
         this.addButton(new ButtonWidget(
                 (this.width / 2) - 75,
-                (this.height / 6) + 24,
+                (this.height / 6) + 24 * this.buttons.size(),
                 150, 20,
                 new TranslatableText("frontported.main.toggleSneak"),
-                button -> this.client.openScreen(new ToggleSneakOptionsScreen(this))
+                button -> this.client.openScreen(new FrontPortedOptionsScreen(this, new TranslatableText("frontported.main.toggleSneak"), Config.Category.TOGGLE_SNEAK){})
+        ));
+        
+        // "Coords HUD" Button
+        this.addButton(new ButtonWidget(
+                (this.width / 2) - 75,
+                (this.height / 6) + 24 * this.buttons.size(),
+                150, 20,
+                new TranslatableText("frontported.main.coordsHud"),
+                button -> this.client.openScreen(new FrontPortedOptionsScreen(this, new TranslatableText("frontported.main.coordsHud"), Config.Category.COORDS_HUD){})
         ));
         
         // "Kill Sounds" Button
         this.addButton(new ButtonWidget(
                 (this.width / 2) - 75,
-                (this.height / 6) + 48,
+                (this.height / 6) + 24 * this.buttons.size(),
                 150, 20,
                 new TranslatableText("frontported.main.killSounds"),
-                button -> this.client.openScreen(new KillSoundsOptionsScreen(this))
+                button -> this.client.openScreen(new FrontPortedOptionsScreen(this, new TranslatableText("frontported.main.killSounds"), Config.Category.KILL_SOUND){})
         ));
         
         // "Chat" Button
         this.addButton(new ButtonWidget(
                 (this.width / 2) - 75,
-                (this.height / 6) + 72,
+                (this.height / 6) + 24 * this.buttons.size(),
                 150, 20,
                 new TranslatableText("frontported.main.chat"),
-                button -> this.client.openScreen(new ChatOptionsScreen(this))
+                button -> this.client.openScreen(new FrontPortedOptionsScreen(this, new TranslatableText("frontported.main.chat"), Config.Category.CHAT){})
         ));
         
         // "Vanilla" Button
         this.addButton(new ButtonWidget(
                 (this.width / 2) - 75,
-                (this.height / 6) + 96,
+                (this.height / 6) + 24 * this.buttons.size(),
                 150, 20,
                 new TranslatableText("frontported.main.vanilla"),
-                button -> this.client.openScreen(new VanillaOptionsScreen(this))
+                button -> this.client.openScreen(new FrontPortedOptionsScreen(this, new TranslatableText("frontported.main.vanilla"), Config.Category.VANILLA) {
+                    @Override
+                    protected void addAdditionalButtons() {
+                        if (this.client == null)
+                            return;
+                        this.addButton(new ButtonWidget(
+                                (this.width / 2) - 75,
+                                (this.height / 6) + ((this.options.size() > 10 ? 12 : 24) * this.buttons.size()),
+                                150, 20,
+                                new TranslatableText("frontported.options.vanilla.editPositions"),
+                                button -> this.client.openScreen(new VanillaPositionsScreen(this))
+                        ));
+                    }
+                })
         ));
         
         // "BlockOverlay" Button
         this.addButton(new ButtonWidget(
                 (this.width / 2) - 75,
-                (this.height / 6) + 120,
+                (this.height / 6) + 24 * this.buttons.size(),
                 150, 20,
                 new TranslatableText("frontported.main.blockOverlay"),
-                button -> this.client.openScreen(new BlockOverlayOptionsScreen(this))
+                button -> this.client.openScreen(new FrontPortedOptionsScreen(this, new TranslatableText("frontported.main.blockOverlay"), Config.Category.BLOCK_OVERLAY) {})
         ));
         
         // "Miscellaneous" Button
         this.addButton(new ButtonWidget(
                 (this.width / 2) - 75,
-                (this.height / 6) + 144,
+                (this.height / 6) + 24 * this.buttons.size(),
                 150, 20,
                 new TranslatableText("frontported.main.misc"),
-                button -> this.client.openScreen(new MiscOptionsScreen(this))
+                button -> this.client.openScreen(new FrontPortedOptionsScreen(this, new TranslatableText("frontported.main.misc"), Config.Category.MISC){})
         ));
         
         // "Done" Button

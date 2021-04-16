@@ -2,6 +2,8 @@ package me.erik.frontported.mixin;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import me.erik.frontported.FrontPorted;
+import me.erik.frontported.features.SlotLocking;
+import me.erik.frontported.hud.CoordsHud;
 import me.erik.frontported.hud.ToggleSneakHud;
 import me.erik.frontported.hud.ToggleSprintHud;
 import net.minecraft.client.MinecraftClient;
@@ -21,10 +23,7 @@ import net.minecraft.util.Arm;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.MathHelper;
-import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
-import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -34,61 +33,58 @@ import java.util.Random;
 @Mixin(InGameHud.class)
 public abstract class InGameHudMixin extends DrawableHelper {
     
-    @Final
-    @Shadow
-    private MinecraftClient client;
-    @Final
-    @Shadow
-    private static Identifier WIDGETS_TEXTURE;
-    @Final
-    @Shadow
-    private Random random;
+    @Unique private MatrixStack hotbarMatrices;
+    @Unique private int currentSlot;
     
-    @Shadow
-    private int scaledWidth;
-    @Shadow
-    private int scaledHeight;
-    @Shadow
-    private int lastHealthValue;
-    @Shadow
-    private int renderHealthValue;
-    @Shadow
-    private long lastHealthCheckTime;
-    @Shadow
-    private long heartJumpEndTick;
-    @Shadow
-    private int ticks;
+    @Final @Shadow private MinecraftClient client;
+    @Final @Shadow private static Identifier WIDGETS_TEXTURE;
+    @Final @Shadow private Random random;
     
-    @Shadow
-    protected abstract PlayerEntity getCameraPlayer();
+    @Shadow private int scaledWidth;
+    @Shadow private int scaledHeight;
+    @Shadow private int lastHealthValue;
+    @Shadow private int renderHealthValue;
+    @Shadow private long lastHealthCheckTime;
+    @Shadow private long heartJumpEndTick;
+    @Shadow private int ticks;
     
-    @Shadow
-    protected abstract void renderHotbarItem(int x, int y, float tickDelta, PlayerEntity player, ItemStack stack);
+    @Shadow protected abstract PlayerEntity getCameraPlayer();
     
-    @Shadow
-    protected abstract LivingEntity getRiddenEntity();
+    @Shadow protected abstract void renderHotbarItem(int x, int y, float tickDelta, PlayerEntity player, ItemStack stack);
     
-    @Shadow
-    protected abstract int getHeartCount(LivingEntity entity);
+    @Shadow protected abstract LivingEntity getRiddenEntity();
     
-    @Shadow
-    protected abstract int getHeartRows(int heartCount);
+    @Shadow protected abstract int getHeartCount(LivingEntity entity);
     
-    @Shadow
-    public abstract TextRenderer getFontRenderer();
+    @Shadow protected abstract int getHeartRows(int heartCount);
+    
+    @Shadow public abstract TextRenderer getFontRenderer();
     
     @Inject(at = @At("TAIL"), method = "render")
     public void render(MatrixStack stack, float f, CallbackInfo info) {
-        if (FrontPorted.config.enableToggleSprint && FrontPorted.config.enableToggleSprintHud)
-            new ToggleSprintHud().render(stack);
-        if (FrontPorted.config.enableToggleSneak && FrontPorted.config.enableToggleSneakHud)
-            new ToggleSneakHud().render(stack);
+        if (!this.client.options.debugEnabled) {
+            if (FrontPorted.config.enableToggleSprint && FrontPorted.config.enableToggleSprintHud)
+                new ToggleSprintHud().render(stack);
+            if (FrontPorted.config.enableToggleSneak && FrontPorted.config.enableToggleSneakHud)
+                new ToggleSneakHud().render(stack);
+            if (FrontPorted.config.coordsHud_enable)
+                new CoordsHud().render(stack);
+        }
     }
     
     @Inject(at = @At("HEAD"), method = "renderPumpkinOverlay", cancellable = true)
     public void renderPumpkinOverlay(CallbackInfo info) {
         if (FrontPorted.config.disablePumpkinOverlay)
             info.cancel();
+    }
+    
+    @Inject(at = @At("HEAD"), method = "renderHotbarItem")
+    public void renderHotbarItem(int x, int y, float tickDelta, PlayerEntity player, ItemStack item, CallbackInfo ci) {
+        if (SlotLocking.isSlotLocked(currentSlot)) {
+            this.client.getTextureManager().bindTexture(new Identifier("frontported", "textures/slot_lock.png"));
+            this.drawTexture(hotbarMatrices, x, y, 0, 0,16, 16);
+        }
+        currentSlot++;
     }
     
     /**
@@ -98,6 +94,9 @@ public abstract class InGameHudMixin extends DrawableHelper {
     @SuppressWarnings("deprecation")
     @Overwrite
     public void renderHotbar(float tickDelta, MatrixStack matrices) {
+        
+        hotbarMatrices = matrices;
+        currentSlot = 0;
         
         final PlayerEntity playerEntity = this.getCameraPlayer();
         

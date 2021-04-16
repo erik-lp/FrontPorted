@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import me.erik.frontported.config.Config;
 import me.erik.frontported.features.KillSound;
+import me.erik.frontported.features.SlotLocking;
 import me.erik.frontported.features.ToggleSneak;
 import me.erik.frontported.features.ToggleSprint;
 import net.fabricmc.api.ModInitializer;
@@ -23,8 +24,10 @@ public class FrontPorted implements ModInitializer {
     public static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
     
     public static Config config;
+    
     public static KeyBinding TOGGLE_SPRINT_KEY;
     public static KeyBinding TOGGLE_SNEAK_KEY;
+    public static KeyBinding LOCK_SLOT;
     
     @Override
     public void onInitialize() {
@@ -36,14 +39,17 @@ public class FrontPorted implements ModInitializer {
         
         TOGGLE_SPRINT_KEY = new KeyBinding("ToggleSprint", GLFW.GLFW_KEY_G, "FrontPorted");
         TOGGLE_SNEAK_KEY = new KeyBinding("ToggleSneak", GLFW.GLFW_KEY_V, "FrontPorted");
+        LOCK_SLOT = new KeyBinding("Lock Slot", GLFW.GLFW_KEY_H, "FrontPorted");
         
         KeyBindingHelper.registerKeyBinding(TOGGLE_SPRINT_KEY);
         KeyBindingHelper.registerKeyBinding(TOGGLE_SNEAK_KEY);
+        KeyBindingHelper.registerKeyBinding(LOCK_SLOT);
         
         ClientTickEvents.START_CLIENT_TICK.register(new ToggleSprint());
         ClientTickEvents.START_CLIENT_TICK.register(new ToggleSneak());
         
         KillSound.init();
+        SlotLocking.init();
         
     }
     

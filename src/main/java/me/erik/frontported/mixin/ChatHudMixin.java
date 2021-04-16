@@ -42,50 +42,33 @@ public abstract class ChatHudMixin extends DrawableHelper {
                     ") .*"
     );
     
-    @Final
-    @Shadow
-    private MinecraftClient client;
-    @Final
-    @Shadow
-    private List<ChatHudLine<OrderedText>> visibleMessages;
-    @Final
-    @Shadow
-    private Deque<Text> messageQueue;
+    @Final @Shadow private MinecraftClient client;
+    @Final @Shadow private List<ChatHudLine<OrderedText>> visibleMessages;
+    @Final @Shadow private Deque<Text> messageQueue;
     
-    @Shadow
-    private int scrolledLines;
-    @Shadow
-    private boolean hasUnreadNewMessages;
+    @Shadow private int scrolledLines;
+    @Shadow private boolean hasUnreadNewMessages;
     
-    @Shadow
-    protected abstract void addMessage(Text message, int messageId);
+    @Shadow protected abstract void addMessage(Text message, int messageId);
     
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
-    @Shadow
-    protected abstract boolean isChatHidden();
+    @Shadow protected abstract boolean isChatHidden();
     
-    @Shadow
-    protected abstract boolean isChatFocused();
+    @Shadow protected abstract boolean isChatFocused();
     
-    @Shadow
-    protected abstract void processMessageQueue();
+    @Shadow protected abstract void processMessageQueue();
     
-    @Shadow
-    public abstract int getVisibleLineCount();
+    @Shadow public abstract int getVisibleLineCount();
     
-    @Shadow
-    public abstract double getChatScale();
+    @Shadow public abstract double getChatScale();
     
-    @Shadow
-    public abstract int getWidth();
+    @Shadow public abstract int getWidth();
     
-    @Shadow
-    private static double getMessageOpacityMultiplier(int age) {
+    @Shadow private static double getMessageOpacityMultiplier(int age) {
         return 0;
     }
     
-    @Shadow
-    public static int getHeight(double heightOption) {
+    @Shadow public static int getHeight(double heightOption) {
         return 0;
     }
     
@@ -195,19 +178,20 @@ public abstract class ChatHudMixin extends DrawableHelper {
                                 final long fillingColor = (targetAlpha << 24) + (targetRed << 16) + (targetGreen << 8) + (targetBlue);
                                 
                                 final int textLength = MinecraftClient.getInstance().textRenderer.getWidth(chatHudLine.getText());
+                                final int xPos = (int) (FrontPorted.config.vanilla_chat_x / 1920D * MinecraftClient.getInstance().getWindow().getScaledWidth());
                                 
                                 fill(
                                         matrices,
-                                        FrontPorted.config.moveVanillaComponents ? (int) FrontPorted.config.vanilla_chat_x : -2,
+                                        FrontPorted.config.moveVanillaComponents ? xPos : -2,
                                         (int) (s - g),
-                                        FrontPorted.config.onlyRenderChatUntilNewline ? (textLength + 2) : (k + 4),
+                                        (FrontPorted.config.onlyRenderChatUntilNewline ? (textLength + 2) : (k + 4)) + (FrontPorted.config.moveVanillaComponents ? xPos : 0),
                                         (int) s,
                                         (int) fillingColor
                                 );
                                 
                                 RenderSystem.enableBlend();
                                 matrices.translate(0D, 0D, 50D);
-                                this.client.textRenderer.drawWithShadow(matrices, chatHudLine.getText(), 0F, (int) (s + h), ((int) (255 * opacity) << 24) + 0xFFFFFF);
+                                this.client.textRenderer.drawWithShadow(matrices, chatHudLine.getText(), FrontPorted.config.moveVanillaComponents ? xPos : 0F, (int) (s + h), ((int) (255 * opacity) << 24) + 0xFFFFFF);
                                 RenderSystem.disableAlphaTest();
                                 RenderSystem.disableBlend();
                                 matrices.pop();

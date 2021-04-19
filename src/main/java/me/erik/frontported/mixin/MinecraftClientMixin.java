@@ -1,6 +1,5 @@
 package me.erik.frontported.mixin;
 
-import me.erik.frontported.features.PerspectiveMod;
 import me.erik.frontported.features.SlotLocking;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -11,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(MinecraftClient.class)
-public abstract class MinecraftClientMixin {
+public class MinecraftClientMixin {
     
     @Shadow public ClientPlayerEntity player;
     

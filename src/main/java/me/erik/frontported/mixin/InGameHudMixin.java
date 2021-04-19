@@ -4,7 +4,6 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import me.erik.frontported.FrontPorted;
 import me.erik.frontported.features.SlotLocking;
 import me.erik.frontported.hud.CoordsHud;
-import me.erik.frontported.hud.MiscHud;
 import me.erik.frontported.hud.ToggleSneakHud;
 import me.erik.frontported.hud.ToggleSprintHud;
 import net.minecraft.client.MinecraftClient;
@@ -20,10 +19,7 @@ import net.minecraft.entity.player.HungerManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tag.FluidTags;
-import net.minecraft.text.LiteralText;
-import net.minecraft.text.MutableText;
 import net.minecraft.util.Arm;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.MathHelper;
@@ -51,8 +47,6 @@ public abstract class InGameHudMixin extends DrawableHelper {
     @Shadow private long lastHealthCheckTime;
     @Shadow private long heartJumpEndTick;
     @Shadow private int ticks;
-    @Shadow private int heldItemTooltipFade;
-    @Shadow private ItemStack currentStack;
     
     @Shadow protected abstract PlayerEntity getCameraPlayer();
     
@@ -75,8 +69,6 @@ public abstract class InGameHudMixin extends DrawableHelper {
                 new ToggleSneakHud().render(stack);
             if (FrontPorted.config.coordsHud_enable)
                 new CoordsHud().render(stack);
-            if (FrontPorted.config.miscHud_enable)
-                new MiscHud().render(stack);
         }
     }
     
@@ -93,42 +85,6 @@ public abstract class InGameHudMixin extends DrawableHelper {
             this.drawTexture(hotbarMatrices, x, y, 0, 0,16, 16);
         }
         currentSlot++;
-    }
-    
-    /**
-     * @reason Move hotbar
-     * @author ErikLP
-     */
-    @Overwrite
-    public void renderHeldItemTooltip(MatrixStack matrices) {
-        
-        this.client.getProfiler().push("selectedItemName");
-        
-        if (this.heldItemTooltipFade > 0 && !this.currentStack.isEmpty()) {
-            MutableText mutableText = (new LiteralText("")).append(this.currentStack.getName()).formatted(this.currentStack.getRarity().formatting);
-            if (this.currentStack.hasCustomName()) {
-                mutableText.formatted(Formatting.ITALIC);
-            }
-            
-            int i = this.getFontRenderer().getWidth(mutableText);
-            int j = FrontPorted.config.moveVanillaComponents ? (int) (FrontPorted.config.vanilla_hotbar_x / 1920D * this.scaledWidth + 91 - i / 2) : ((this.scaledWidth - i) / 2);
-            int k = (FrontPorted.config.moveVanillaComponents ? (int) (FrontPorted.config.vanilla_hotbar_y / 1080D * this.scaledHeight - 37) : this.scaledHeight - 59) + (this.client.interactionManager.hasStatusBars() ? 0 : 14);
-            
-            int l = Math.min(255, (int) ((float) this.heldItemTooltipFade * 256.0F / 10.0F));
-            
-            if (l > 0) {
-                RenderSystem.pushMatrix();
-                RenderSystem.enableBlend();
-                RenderSystem.defaultBlendFunc();
-                fill(matrices, j - 2, k - 2, j + i + 2, k + 9 + 2, this.client.options.getTextBackgroundColor(0));
-                this.getFontRenderer().drawWithShadow(matrices, mutableText, (float) j, (float) k, 0xFFFFFF + (l << 24));
-                RenderSystem.disableBlend();
-                RenderSystem.popMatrix();
-            }
-        }
-        
-        this.client.getProfiler().pop();
-        
     }
     
     /**

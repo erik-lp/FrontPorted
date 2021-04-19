@@ -3,11 +3,13 @@ package me.erik.frontported;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import me.erik.frontported.config.Config;
-import me.erik.frontported.features.*;
+import me.erik.frontported.features.KillSound;
+import me.erik.frontported.features.SlotLocking;
+import me.erik.frontported.features.ToggleSneak;
+import me.erik.frontported.features.ToggleSprint;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.options.KeyBinding;
 import org.apache.commons.io.FileUtils;
 import org.lwjgl.glfw.GLFW;
@@ -26,7 +28,6 @@ public class FrontPorted implements ModInitializer {
     public static KeyBinding TOGGLE_SPRINT_KEY;
     public static KeyBinding TOGGLE_SNEAK_KEY;
     public static KeyBinding LOCK_SLOT;
-    public static KeyBinding PERSPECTIVE;
     
     @Override
     public void onInitialize() {
@@ -39,16 +40,13 @@ public class FrontPorted implements ModInitializer {
         TOGGLE_SPRINT_KEY = new KeyBinding("ToggleSprint", GLFW.GLFW_KEY_G, "FrontPorted");
         TOGGLE_SNEAK_KEY = new KeyBinding("ToggleSneak", GLFW.GLFW_KEY_V, "FrontPorted");
         LOCK_SLOT = new KeyBinding("Lock Slot", GLFW.GLFW_KEY_H, "FrontPorted");
-        PERSPECTIVE = new KeyBinding("PerspectiveMod", GLFW.GLFW_KEY_LEFT_ALT, "FrontPorted");
         
         KeyBindingHelper.registerKeyBinding(TOGGLE_SPRINT_KEY);
         KeyBindingHelper.registerKeyBinding(TOGGLE_SNEAK_KEY);
         KeyBindingHelper.registerKeyBinding(LOCK_SLOT);
-        KeyBindingHelper.registerKeyBinding(PERSPECTIVE);
         
         ClientTickEvents.START_CLIENT_TICK.register(new ToggleSprint());
         ClientTickEvents.START_CLIENT_TICK.register(new ToggleSneak());
-        ClientTickEvents.START_CLIENT_TICK.register(new PerspectiveMod());
         
         KillSound.init();
         SlotLocking.init();

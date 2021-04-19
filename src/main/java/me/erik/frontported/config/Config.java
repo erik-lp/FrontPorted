@@ -79,33 +79,13 @@ public class Config {
     
     // Misc HUD
     @Option(Category.MISC_HUD)
-    public boolean miscHud_enable = false;
-    
-    @Option(Category.MISC_HUD)
-    @DoubleOption(max = 1920D)
-    public double miscHud_x = 5;
-    
-    @Option(Category.MISC_HUD)
-    @DoubleOption(max = 1080D)
-    public double miscHud_y = 5;
-    
-    @Option(Category.MISC_HUD)
-    @DoubleOption(max = 255D)
-    public double miscHud_red = 255;
-    
-    @Option(Category.MISC_HUD)
-    @DoubleOption(max = 255D)
-    public double miscHud_green = 255;
-    
-    @Option(Category.MISC_HUD)
-    @DoubleOption(max = 255D)
-    public double miscHud_blue = 255;
+    public boolean miscHud_enable = true;
     
     @Option(Category.MISC_HUD)
     public boolean miscHud_fps = true;
     
     @Option(Category.MISC_HUD)
-    public boolean miscHud_memory = true;
+    public boolean miscHud_ping = true;
     
     // Kill Sound
     @Option(Category.KILL_SOUND)
@@ -133,15 +113,6 @@ public class Config {
     
     @Option(Category.MISC)
     public boolean disableInventoryOffset = true;
-    
-    @Option(Category.MISC)
-    public boolean slotLocking = true;
-    
-    @Option(Category.MISC)
-    public boolean perspectiveMod_enable = true;
-    
-    @Option(Category.MISC)
-    public boolean perspectiveMod_hold = true;
     
     @Option(Category.MISC)
     @DoubleOption(max = 100D)
@@ -223,8 +194,8 @@ public class Config {
     @Option(Category.VANILLA)
     public boolean disableLinkConfirmation = false;
     
-    @Option(Category.VANILLA)
-    public boolean moveVanillaComponents = false;
+    @Option(Category.VANILLA_POSITIONS)
+    public boolean moveVanillaComponents = true;
     
     // Vanilla Positions
     @Option(Category.VANILLA_POSITIONS)

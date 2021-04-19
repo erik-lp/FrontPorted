@@ -54,8 +54,6 @@ public class SlotLocking {
     }
     
     public static void toggleSlot(int slotId) {
-        if (!FrontPorted.config.slotLocking)
-            return;
         if (isSlotLocked(slotId))
             unlockSlot(slotId);
         else
@@ -74,8 +72,6 @@ public class SlotLocking {
     }
     
     public static void handleInputEvents(ClientPlayerEntity player) {
-        if (!FrontPorted.config.slotLocking)
-            return;
         while (FrontPorted.LOCK_SLOT.wasPressed())
             toggleSlot(player.inventory.selectedSlot);
     }

@@ -78,14 +78,17 @@ public abstract class ChatHudMixin extends DrawableHelper {
      */
     @Overwrite
     public void addMessage(Text message) {
-        if (vanillaDeathPattern.matcher(message.getString()).matches() && FrontPorted.config.enableKillSound)
-            try {
-                KillSound.play();
-            } catch (Exception ex) {
-                if (this.client.player != null)
-                this.addMessage(Text.of("§c[§6FrontPorted§c] Tried to play a kill sound, but something went wrong! Check your logs fore more info."), 0);
-                ex.printStackTrace();
+        if (vanillaDeathPattern.matcher(message.getString()).matches() && FrontPorted.config.enableKillSound && client.player != null) {
+            if (!message.getString().startsWith(client.player.getName().getString()) && message.getString().replace(".", "").endsWith(client.player.getName().getString())) {
+                try {
+                    KillSound.play();
+                } catch (Exception ex) {
+                    if (this.client.player != null)
+                        this.addMessage(Text.of("§c[§6FrontPorted§c] Tried to play a kill sound, but something went wrong! Check your logs fore more info."), 0);
+                    ex.printStackTrace();
+                }
             }
+        }
         this.addMessage(FrontPorted.config.chatTimeStamps ? Text.of("[" + this.getTimeStamp() + "] " + message.getString()) : message, 0);
     }
     

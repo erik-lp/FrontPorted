@@ -48,6 +48,15 @@ public final class FrontPortedMainScreen extends Screen {
                 button -> this.client.openScreen(new FrontPortedOptionsScreen(this, new TranslatableText("frontported.main.coordsHud"), Config.Category.COORDS_HUD){})
         ));
         
+        // "Misc HUD" Button
+        this.addButton(new ButtonWidget(
+                (this.width / 2) - 75,
+                (this.height / 6) + 24 * this.buttons.size(),
+                150, 20,
+                new TranslatableText("frontported.main.miscHud"),
+                button -> this.client.openScreen(new FrontPortedOptionsScreen(this, new TranslatableText("frontported.main.miscHud"), Config.Category.MISC_HUD){})
+        ));
+        
         // "Kill Sounds" Button
         this.addButton(new ButtonWidget(
                 (this.width / 2) - 75,

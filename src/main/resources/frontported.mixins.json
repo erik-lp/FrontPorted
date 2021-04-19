@@ -14,7 +14,9 @@
         "InGameOverlayRendererMixin",
         "LanguageOptionsScreenMixin",
         "LivingEntityMixin",
+        "MinecraftClientAccessor",
         "MinecraftClientMixin",
+        "MouseMixin",
         "RenderSystemMixin",
         "WorldRendererMixin"
     ],

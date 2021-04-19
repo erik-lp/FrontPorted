@@ -2,6 +2,7 @@
     "frontported.main.toggleSneak": "ToggleSneak",
     "frontported.main.toggleSprint": "ToggleSprint",
     "frontported.main.coordsHud": "Coords HUD",
+    "frontported.main.miscHud": "Misc HUD",
     "frontported.main.killSounds": "Kill Sounds",
     "frontported.main.chat": "Chat",
     "frontported.main.vanilla": "Vanilla",
@@ -29,6 +30,15 @@
     "frontported.options.coordsHud.coordsHud_green": "Coords HUD Green: %f",
     "frontported.options.coordsHud.coordsHud_blue": "Coords HUD Blue: %f",
     
+    "frontported.options.miscHud.miscHud_enable": "Misc HUD",
+    "frontported.options.miscHud.miscHud_x": "Misc HUD X: %f",
+    "frontported.options.miscHud.miscHud_y": "Misc HUD Y: %f",
+    "frontported.options.miscHud.miscHud_red": "Misc HUD Red: %f",
+    "frontported.options.miscHud.miscHud_green": "Misc HUD Green: %f",
+    "frontported.options.miscHud.miscHud_blue": "Misc HUD Blue: %f",
+    "frontported.options.miscHud.miscHud_fps": "Show FPS",
+    "frontported.options.miscHud.miscHud_memory": "Show Memory Usage",
+    
     "frontported.options.killSound.enableKillSound": "Kill Sounds",
     "frontported.options.killSound.killSoundVolume": "Kill Sound Volume: %f%%",
     
@@ -39,6 +49,9 @@
     "frontported.options.misc.disableNausea": "Disable Nausea",
     "frontported.options.misc.disableInventoryOffset": "Disable Inventory Potion Offset",
     "frontported.options.misc.fireOverlayReduction": "Fire Overlay Reduction: %f%%",
+    "frontported.options.misc.slotLocking": "Slot Locking",
+    "frontported.options.misc.perspectiveMod_enable": "Perspective Mod",
+    "frontported.options.misc.perspectiveMod_hold": "Hold Perspective Key",
     
     "frontported.options.chat.customChatBackground": "Custom Chat Background",
     "frontported.options.chat.customChatChroma": "Custom Chat Chroma",

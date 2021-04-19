@@ -97,7 +97,7 @@ public abstract class FrontPortedOptionsScreen extends GameOptionsScreen {
         if (this.client == null)
             return;
         
-        final boolean twoSided = this.options.size() > 10;
+        final boolean twoSided = this.options.size() >= 10;
         
         for (int i = 0; i < this.options.size(); i++) {
             final Option option = this.options.get(i);

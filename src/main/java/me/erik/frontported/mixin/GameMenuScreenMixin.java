@@ -159,7 +159,7 @@ public class GameMenuScreenMixin extends Screen {
         
         this.addButton(new ButtonWidget(
                 5,
-                this.height - 25,
+                5,
                 150, 20,
                 new TranslatableText("frontported.main.title"),
                 (w) -> this.client.openScreen(new FrontPortedMainScreen(this))

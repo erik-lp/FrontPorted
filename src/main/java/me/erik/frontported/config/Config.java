@@ -77,16 +77,6 @@ public class Config {
     @DoubleOption(max = 255D)
     public double coordsHud_blue = 255;
     
-    // Misc HUD
-    @Option(Category.MISC_HUD)
-    public boolean miscHud_enable = true;
-    
-    @Option(Category.MISC_HUD)
-    public boolean miscHud_fps = true;
-    
-    @Option(Category.MISC_HUD)
-    public boolean miscHud_ping = true;
-    
     // Kill Sound
     @Option(Category.KILL_SOUND)
     public boolean enableKillSound = true;
@@ -117,6 +107,12 @@ public class Config {
     @Option(Category.MISC)
     @DoubleOption(max = 100D)
     public double fireOverlayReduction = 50;
+    
+    @Option(Category.MISC)
+    public boolean perspectiveMod_enable = true;
+    
+    @Option(Category.MISC)
+    public boolean perspectiveMod_hold = true;
     
     // Chat
     @Option(Category.CHAT)
@@ -194,7 +190,7 @@ public class Config {
     @Option(Category.VANILLA)
     public boolean disableLinkConfirmation = false;
     
-    @Option(Category.VANILLA_POSITIONS)
+    @Option(Category.VANILLA)
     public boolean moveVanillaComponents = true;
     
     // Vanilla Positions

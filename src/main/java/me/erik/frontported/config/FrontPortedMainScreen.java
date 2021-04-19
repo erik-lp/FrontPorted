@@ -79,7 +79,7 @@ public final class FrontPortedMainScreen extends Screen {
                             return;
                         this.addButton(new ButtonWidget(
                                 (this.width / 2) - 75,
-                                (this.height / 6) + ((this.options.size() > 10 ? 12 : 24) * this.buttons.size()),
+                                (this.height / 6) + ((this.options.size() >= 10 ? 12 : 24) * this.buttons.size()),
                                 150, 20,
                                 new TranslatableText("frontported.options.vanilla.editPositions"),
                                 button -> this.client.openScreen(new VanillaPositionsScreen(this))

@@ -15,6 +15,7 @@
         "LanguageOptionsScreenMixin",
         "LivingEntityMixin",
         "MinecraftClientMixin",
+        "MouseMixin",
         "RenderSystemMixin",
         "WorldRendererMixin"
     ],

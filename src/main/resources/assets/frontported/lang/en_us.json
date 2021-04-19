@@ -39,6 +39,8 @@
     "frontported.options.misc.disableNausea": "Disable Nausea",
     "frontported.options.misc.disableInventoryOffset": "Disable Inventory Potion Offset",
     "frontported.options.misc.fireOverlayReduction": "Fire Overlay Reduction: %f%%",
+    "frontported.options.misc.perspectiveMod_enable": "Perspective Mod",
+    "frontported.options.misc.perspectiveMod_hold": "Hold Perspective Key",
     
     "frontported.options.chat.customChatBackground": "Custom Chat Background",
     "frontported.options.chat.customChatChroma": "Custom Chat Chroma",

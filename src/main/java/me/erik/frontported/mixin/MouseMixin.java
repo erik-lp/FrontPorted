@@ -1,8 +1,12 @@
 package me.erik.frontported.mixin;
 
+import me.erik.frontported.FrontPorted;
 import me.erik.frontported.features.PerspectiveMod;
+import me.erik.frontported.features.Zoom;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.Mouse;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.util.math.MathHelper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -15,6 +19,14 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
  */
 @Mixin(Mouse.class)
 public class MouseMixin {
+    
+    @Inject(at = @At("HEAD"), method = "onMouseScroll", cancellable = true)
+    private void onMouseScroll(long window, double horizontal, double vertical, CallbackInfo ci) {
+        if (FrontPorted.ZOOM.isPressed() && MinecraftClient.getInstance().currentScreen == null) {
+            Zoom.zoomLevel = (int) MathHelper.clamp(Zoom.zoomLevel - vertical, 1, 80);
+            ci.cancel();
+        }
+    }
     
     @Inject(method = "updateMouse", at = @At(value = "INVOKE", target = "net/minecraft/client/tutorial/TutorialManager.onUpdateMouse(DD)V"), locals = LocalCapture.CAPTURE_FAILEXCEPTION)
     private void perspectiveUpdatePitchYaw(CallbackInfo info, double adjustedSens, double x, double y, int invert) {

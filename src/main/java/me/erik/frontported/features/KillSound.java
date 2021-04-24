@@ -13,7 +13,7 @@ import java.net.URLConnection;
 
 public class KillSound {
     
-    public static final File soundFile = new File("./config/frontported/kill.wav");
+    public static final File soundFile = new File("config/frontported/kill.wav");
     
     private KillSound() {
     }

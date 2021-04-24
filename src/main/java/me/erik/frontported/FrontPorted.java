@@ -25,6 +25,7 @@ public class FrontPorted implements ModInitializer {
     public static KeyBinding TOGGLE_SPRINT_KEY;
     public static KeyBinding TOGGLE_SNEAK_KEY;
     public static KeyBinding LOCK_SLOT;
+    public static KeyBinding ZOOM;
     public static KeyBinding PERSPECTIVE;
     
     @Override
@@ -38,11 +39,13 @@ public class FrontPorted implements ModInitializer {
         TOGGLE_SPRINT_KEY = new KeyBinding("ToggleSprint", GLFW.GLFW_KEY_G, "FrontPorted");
         TOGGLE_SNEAK_KEY = new KeyBinding("ToggleSneak", GLFW.GLFW_KEY_V, "FrontPorted");
         LOCK_SLOT = new KeyBinding("Lock Slot", GLFW.GLFW_KEY_H, "FrontPorted");
+        ZOOM = new KeyBinding("Zoom", GLFW.GLFW_KEY_C, "FrontPorted");
         PERSPECTIVE = new KeyBinding("Perspective", GLFW.GLFW_KEY_LEFT_ALT, "FrontPorted");
         
         KeyBindingHelper.registerKeyBinding(TOGGLE_SPRINT_KEY);
         KeyBindingHelper.registerKeyBinding(TOGGLE_SNEAK_KEY);
         KeyBindingHelper.registerKeyBinding(LOCK_SLOT);
+        KeyBindingHelper.registerKeyBinding(ZOOM);
         KeyBindingHelper.registerKeyBinding(PERSPECTIVE);
         
         ClientTickEvents.START_CLIENT_TICK.register(new ToggleSprint());

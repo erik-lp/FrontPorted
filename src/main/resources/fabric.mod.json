@@ -22,7 +22,6 @@
     "mixins": [
         "frontported.mixins.json"
     ],
-    "accessWidener": "frontported.accesswidener",
     "depends": {
         "fabricloader": ">=0.11.3",
         "fabric": "*",

@@ -1,4 +1,0 @@
-accessWidener v1 named
-
-accessible class net/minecraft/client/gui/screen/options/LanguageOptionsScreen$LanguageSelectionListWidget
-accessible field net/minecraft/client/gui/screen/options/LanguageOptionsScreen$LanguageSelectionListWidget$LanguageEntry languageDefinition Lnet/minecraft/client/resource/language/LanguageDefinition;

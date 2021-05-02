@@ -12,7 +12,6 @@
         "GameRendererMixin",
         "InGameHudMixin",
         "InGameOverlayRendererMixin",
-        "LanguageOptionsScreenMixin",
         "LivingEntityMixin",
         "MinecraftClientMixin",
         "MouseMixin",

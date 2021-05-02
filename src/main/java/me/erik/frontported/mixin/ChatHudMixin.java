@@ -12,6 +12,7 @@ import net.minecraft.text.OrderedText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.math.MathHelper;
+import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -73,20 +74,21 @@ public abstract class ChatHudMixin extends DrawableHelper {
     }
     
     /**
-     * @reason Chat timestamps
+     * @reason Kill sounds, chat timestamps
      * @author ErikLP
      */
     @Overwrite
     public void addMessage(Text message) {
-        if (vanillaDeathPattern.matcher(message.getString()).matches() && FrontPorted.config.enableKillSound)
+        if (vanillaDeathPattern.matcher(message.getString()).matches() && FrontPorted.config.enableKillSound) {
             try {
                 KillSound.play();
             } catch (Exception ex) {
                 if (this.client.player != null)
-                this.addMessage(Text.of("§c[§6FrontPorted§c] Tried to play a kill sound, but something went wrong! Check your logs fore more info."), 0);
+                    this.addMessage(Text.of("§c[§6FrontPorted§c] Tried to play a kill sound, but something went wrong! Check your logs fore more info."));
                 ex.printStackTrace();
             }
-        this.addMessage(FrontPorted.config.chatTimeStamps ? Text.of("[" + this.getTimeStamp() + "] " + message.getString()) : message, 0);
+        }
+        this.addMessage(Text.of("[" + this.getTimeStamp() + "] ").copy().append(message), 0);
     }
     
     private String getTimeStamp() {
@@ -102,10 +104,9 @@ public abstract class ChatHudMixin extends DrawableHelper {
     }
     
     /**
-     * @reason Custom chat background
+     * @reason Custom chat features
      * @author ErikLP
      */
-    @SuppressWarnings("deprecation")
     @Overwrite
     public void render(MatrixStack matrices, int tickDelta) {
         
@@ -136,9 +137,9 @@ public abstract class ChatHudMixin extends DrawableHelper {
                     final double g = 9D * (this.client.options.chatLineSpacing + 1D);
                     final double h = (-8.0 * (this.client.options.chatLineSpacing + 1D)) + (4D * this.client.options.chatLineSpacing);
                     
-                    RenderSystem.pushMatrix();
-                    RenderSystem.translatef(2F, -310.0f + (float) ((FrontPorted.config.vanilla_chat_y / 1080D) * this.client.getWindow().getScaledHeight()) + getHeight(this.client.options.chatHeightUnfocused / (this.client.options.chatLineSpacing + 1D)), 0F);
-                    RenderSystem.scaled(chatScale, chatScale, 1D);
+                    GL11.glPushMatrix();
+                    GL11.glTranslatef(2F, -310.0f + (float) ((FrontPorted.config.vanilla_chat_y / 1080D) * this.client.getWindow().getScaledHeight()) + getHeight(this.client.options.chatHeightUnfocused / (this.client.options.chatLineSpacing + 1D)), 0F);
+                    GL11.glScaled(chatScale, chatScale, 1D);
                     
                     int l = 0;
                     
@@ -192,8 +193,9 @@ public abstract class ChatHudMixin extends DrawableHelper {
                                 RenderSystem.enableBlend();
                                 matrices.translate(0D, 0D, 50D);
                                 this.client.textRenderer.drawWithShadow(matrices, chatHudLine.getText(), FrontPorted.config.moveVanillaComponents ? xPos : 0F, (int) (s + h), ((int) (255 * opacity) << 24) + 0xFFFFFF);
-                                RenderSystem.disableAlphaTest();
-                                RenderSystem.disableBlend();
+                                GL11.glDisable(GL11.GL_ALPHA_TEST);
+                                GL11.glDisable(GL11.GL_BLEND);
+                                
                                 matrices.pop();
                                 
                             }
@@ -211,13 +213,13 @@ public abstract class ChatHudMixin extends DrawableHelper {
                         matrices.translate(0D, 0D, 50D);
                         this.client.textRenderer.drawWithShadow(matrices, (new TranslatableText("chat.queue", this.messageQueue.size())), 0F, 1F, 0xFFFFFF + (m << 24));
                         matrices.pop();
-                        RenderSystem.disableAlphaTest();
-                        RenderSystem.disableBlend();
+                        GL11.glDisable(GL11.GL_ALPHA_TEST);
+                        GL11.glDisable(GL11.GL_BLEND);
                     }
                     
                     if (chatFocused) {
                         final int v = 9;
-                        RenderSystem.translatef(-3.0f, 0.0F, 0.0F);
+                        GL11.glTranslatef(-3.0f, 0.0F, 0.0F);
                         final int w = (visibleMessageCount * v) + visibleMessageCount;
                         x = (l * v) + l;
                         final int y = (this.scrolledLines * x) / visibleMessageCount;
@@ -226,7 +228,7 @@ public abstract class ChatHudMixin extends DrawableHelper {
                             fill(matrices, 2, -y, 1, -y - z, backgroundColor);
                     }
                     
-                    RenderSystem.popMatrix();
+                    GL11.glPopMatrix();
                     
                 }
                 
@@ -244,9 +246,9 @@ public abstract class ChatHudMixin extends DrawableHelper {
                     
                     final double d = this.getChatScale();
                     final int k = MathHelper.ceil((double) this.getWidth() / d);
-                    RenderSystem.pushMatrix();
-                    RenderSystem.translatef(2.0F, 8.0F, 0.0F);
-                    RenderSystem.scaled(d, d, 1.0D);
+                    GL11.glPushMatrix();
+                    GL11.glTranslatef(2.0F, 8.0F, 0.0F);
+                    GL11.glScaled(d, d, 1.0D);
                     final double e = (this.client.options.chatOpacity * 0.8999999761581421D) + 0.10000000149011612D;
                     final double f = this.client.options.textBackgroundOpacity;
                     final double g = 9.0D * (this.client.options.chatLineSpacing + 1.0D);
@@ -277,8 +279,8 @@ public abstract class ChatHudMixin extends DrawableHelper {
                                     RenderSystem.enableBlend();
                                     matrices.translate(0.0D, 0.0D, 50.0D);
                                     this.client.textRenderer.drawWithShadow(matrices, chatHudLine.getText(), 0.0F, (float) ((int) (s + h)), 16777215 + (aa << 24));
-                                    RenderSystem.disableAlphaTest();
-                                    RenderSystem.disableBlend();
+                                    GL11.glDisable(GL11.GL_ALPHA_TEST);
+                                    GL11.glDisable(GL11.GL_BLEND);
                                     matrices.pop();
                                 }
                             }
@@ -300,13 +302,13 @@ public abstract class ChatHudMixin extends DrawableHelper {
                         matrices.translate(0.0D, 0.0D, 50.0D);
                         this.client.textRenderer.drawWithShadow(matrices, text, 0.0F, 1.0F, 0xFFFFFF + (m << 24));
                         matrices.pop();
-                        RenderSystem.disableAlphaTest();
-                        RenderSystem.disableBlend();
+                        GL11.glDisable(GL11.GL_ALPHA_TEST);
+                        GL11.glDisable(GL11.GL_BLEND);
                     }
                     
                     if (bl) {
                         final int v = 9;
-                        RenderSystem.translatef(-3.0f, 0.0F, 0.0F);
+                        GL11.glTranslatef(-3.0f, 0.0F, 0.0F);
                         w = (j * v) + j;
                         x = (l * v) + l;
                         final int y = (this.scrolledLines * x) / j;
@@ -319,7 +321,7 @@ public abstract class ChatHudMixin extends DrawableHelper {
                         }
                     }
                     
-                    RenderSystem.popMatrix();
+                    GL11.glPopMatrix();
                     
                 }
                 

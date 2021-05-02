@@ -2,10 +2,13 @@ package me.erik.frontported.mixin;
 
 import me.erik.frontported.FrontPorted;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -14,9 +17,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 /**
  * Taken from Giz5Mod under MIT license (https://github.com/Toshimichi0915/giz5/blob/master/LICENSE.md)
  */
-@SuppressWarnings({"EqualsBetweenInconvertibleTypes", "BoundedWildcard"})
+@SuppressWarnings("EqualsBetweenInconvertibleTypes")
 @Mixin(LivingEntity.class)
-public class LivingEntityMixin {
+public abstract class LivingEntityMixin extends Entity {
+    
+    protected LivingEntityMixin(EntityType<?> type, World world) {
+        super(type, world);
+    }
     
     @Inject(at = @At("HEAD"), method = "hasStatusEffect(Lnet/minecraft/entity/effect/StatusEffect;)Z", cancellable = true)
     public void hasStatusEffect(StatusEffect effect, CallbackInfoReturnable<Boolean> info) {

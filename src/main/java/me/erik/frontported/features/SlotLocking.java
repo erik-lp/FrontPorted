@@ -62,12 +62,12 @@ public class SlotLocking {
     }
     
     private static void lockSlot(int slotId) {
-        assert (!isSlotLocked(slotId));
+        assert !isSlotLocked(slotId);
         lockedSlots.add(slotId);
     }
     
     private static void unlockSlot(int slotId) {
-        assert (isSlotLocked(slotId));
+        assert isSlotLocked(slotId);
         lockedSlots.remove((Integer) slotId);
     }
     

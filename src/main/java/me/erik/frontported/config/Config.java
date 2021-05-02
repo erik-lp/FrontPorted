@@ -114,6 +114,12 @@ public class Config {
     @Option(Category.MISC)
     public boolean perspectiveMod_hold = true;
     
+    @Option(Category.MISC)
+    public boolean chatReplacements = true;
+    
+    @Option(Category.MISC)
+    public boolean damageOverlay = true;
+    
     // Chat
     @Option(Category.CHAT)
     public boolean customChatBackground = true;
@@ -196,70 +202,6 @@ public class Config {
     // Vanilla Positions
     @Option(Category.VANILLA_POSITIONS)
     @DoubleOption(max = 1920D)
-    public double vanilla_backToGame_x = 20;
-    
-    @Option(Category.VANILLA_POSITIONS)
-    @DoubleOption(max = 1080D)
-    public double vanilla_backToGame_y = 20;
-    
-    @Option(Category.VANILLA_POSITIONS)
-    @DoubleOption(max = 1920D)
-    public double vanilla_advancements_x = 20;
-    
-    @Option(Category.VANILLA_POSITIONS)
-    @DoubleOption(max = 1080D)
-    public double vanilla_advancements_y = 100;
-    
-    @Option(Category.VANILLA_POSITIONS)
-    @DoubleOption(max = 1920D)
-    public double vanilla_stats_x = 338;
-    
-    @Option(Category.VANILLA_POSITIONS)
-    @DoubleOption(max = 1080D)
-    public double vanilla_stats_y = 100;
-    
-    @Option(Category.VANILLA_POSITIONS)
-    @DoubleOption(max = 1920D)
-    public double vanilla_sendFeedback_x = 20;
-    
-    @Option(Category.VANILLA_POSITIONS)
-    @DoubleOption(max = 1080D)
-    public double vanilla_sendFeedback_y = 180;
-    
-    @Option(Category.VANILLA_POSITIONS)
-    @DoubleOption(max = 1920D)
-    public double vanilla_reportBugs_x = 338;
-    
-    @Option(Category.VANILLA_POSITIONS)
-    @DoubleOption(max = 1080D)
-    public double vanilla_reportBugs_y = 180;
-    
-    @Option(Category.VANILLA_POSITIONS)
-    @DoubleOption(max = 1920D)
-    public double vanilla_options_x = 20;
-    
-    @Option(Category.VANILLA_POSITIONS)
-    @DoubleOption(max = 1080D)
-    public double vanilla_options_y = 260;
-    
-    @Option(Category.VANILLA_POSITIONS)
-    @DoubleOption(max = 1920D)
-    public double vanilla_shareToLan_x = 338;
-    
-    @Option(Category.VANILLA_POSITIONS)
-    @DoubleOption(max = 1080D)
-    public double vanilla_shareToLan_y = 260;
-    
-    @Option(Category.VANILLA_POSITIONS)
-    @DoubleOption(max = 1920D)
-    public double vanilla_disconnect_x = 20;
-    
-    @Option(Category.VANILLA_POSITIONS)
-    @DoubleOption(max = 1080D)
-    public double vanilla_disconnect_y = 340;
-    
-    @Option(Category.VANILLA_POSITIONS)
-    @DoubleOption(max = 1920D)
     public double vanilla_hotbar_x = 1360;
     
     @Option(Category.VANILLA_POSITIONS)
@@ -282,13 +224,13 @@ public class Config {
     
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
-    @interface Option {
+    public @interface Option {
         Category value();
     }
     
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
-    @interface DoubleOption {
+    public @interface DoubleOption {
         double min() default 0D;
         double max();
         float step() default 1F;

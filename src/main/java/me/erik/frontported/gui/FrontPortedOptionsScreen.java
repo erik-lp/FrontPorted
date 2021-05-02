@@ -1,6 +1,7 @@
-package me.erik.frontported.config;
+package me.erik.frontported.gui;
 
 import me.erik.frontported.FrontPorted;
+import me.erik.frontported.config.Config;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ScreenTexts;
 import net.minecraft.client.gui.screen.options.GameOptionsScreen;
@@ -101,8 +102,8 @@ public abstract class FrontPortedOptionsScreen extends GameOptionsScreen {
         
         for (int i = 0; i < this.options.size(); i++) {
             final Option option = this.options.get(i);
-            final int x = twoSided ? (((this.width / 2) - 155) + ((i % 2) * 160)) : ((this.width / 2) - 75);
-            final int y = twoSided ? (((this.height / 6) - 12) + (24 * (i >> 1))) : ((this.height / 6) + (24 * i));
+            final int x = twoSided ? this.width / 2 - 155 + i % 2 * 160 : this.width / 2 - 75;
+            final int y = twoSided ? this.height / 6 - 12 + 24 * (i >> 1) : this.height / 6 + 24 * i;
             final AbstractButtonWidget button = option.createButton(this.client.options, x, y, 150);
             this.addButton(button);
         }
@@ -110,11 +111,11 @@ public abstract class FrontPortedOptionsScreen extends GameOptionsScreen {
         this.addAdditionalButtons();
         
         this.addButton(new ButtonWidget(
-                (this.width / 2) - 100,
-                (this.height / 6) + ((twoSided ? 12 : 24) * (this.buttons.size() + 1)),
+                this.width / 2 - 100,
+                this.height / 6 + (twoSided ? 12 : 24) * (this.buttons.size() + 1),
                 200, 20,
                 ScreenTexts.DONE,
-                (b) -> this.onClose()
+                b -> this.onClose()
         ));
         
     }

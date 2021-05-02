@@ -1,8 +1,7 @@
 package me.erik.frontported.mixin;
 
 import me.erik.frontported.FrontPorted;
-import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.WorldRenderer;
+import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Matrix4f;

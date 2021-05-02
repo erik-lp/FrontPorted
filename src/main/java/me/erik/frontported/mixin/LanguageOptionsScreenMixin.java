@@ -17,20 +17,21 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LanguageOptionsScreen.class)
 public class LanguageOptionsScreenMixin extends GameOptionsScreen {
     
-    @Shadow
-    @Final
-    private LanguageManager languageManager;
+    @SuppressWarnings("ConstantConditions")
+    LanguageOptionsScreen that = (LanguageOptionsScreen) (Object) (this);
     
-    @Shadow
-    private LanguageOptionsScreen.LanguageSelectionListWidget languageSelectionList;
-    @Shadow
-    private OptionButtonWidget forceUnicodeButton;
-    @Shadow
-    private ButtonWidget doneButton;
+    @Shadow @Final private LanguageManager languageManager;
+    
+    @Shadow private LanguageOptionsScreen.LanguageSelectionListWidget languageSelectionList;
+    @Shadow private OptionButtonWidget forceUnicodeButton;
+    @Shadow private ButtonWidget doneButton;
     
     protected LanguageOptionsScreenMixin(Screen parent, GameOptions gameOptions, Text title) {
         super(parent, gameOptions, title);
@@ -40,12 +41,11 @@ public class LanguageOptionsScreenMixin extends GameOptionsScreen {
      * @reason Language change confirmation
      * @author ErikLP
      */
-    @SuppressWarnings("ConstantConditions")
     @Overwrite
     public void init() {
         if (this.client == null)
             return;
-        this.languageSelectionList = ((LanguageOptionsScreen) (Object) (this)).new LanguageSelectionListWidget(this.client);
+        this.languageSelectionList = that.new LanguageSelectionListWidget(this.client);
         this.children.add(this.languageSelectionList);
         this.forceUnicodeButton = this.addButton(new OptionButtonWidget((this.width / 2) - 155, this.height - 38, 150, 20, Option.FORCE_UNICODE_FONT, Option.FORCE_UNICODE_FONT.getDisplayString(this.gameOptions), (button) -> {
             Option.FORCE_UNICODE_FONT.toggle(this.gameOptions);
@@ -61,13 +61,14 @@ public class LanguageOptionsScreenMixin extends GameOptionsScreen {
                             (bl) -> {
                                 if (bl)
                                     this.setLanguage(languageEntry);
-                                }, new TranslatableText("frontported.options.vanilla.confirmLanguageChange"),
+                            }, new TranslatableText("frontported.options.vanilla.confirmLanguageChange"),
                             Text.of("Do you really want to change your game language to " + languageEntry.languageDefinition + "?")
                     ));
                 else this.setLanguage(languageEntry);
             }
             this.client.openScreen(this.parent);
         }));
+        
         super.init();
     }
     

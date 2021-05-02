@@ -1,5 +1,6 @@
-package me.erik.frontported.config;
+package me.erik.frontported.gui;
 
+import me.erik.frontported.config.Config;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ScreenTexts;
 import net.minecraft.client.gui.widget.ButtonWidget;
@@ -23,7 +24,7 @@ public final class FrontPortedMainScreen extends Screen {
         
         // "ToggleSprint" Button
         this.addButton(new ButtonWidget(
-                (this.width / 2) - 75,
+                this.width / 2 - 75,
                 this.height / 6,
                 150, 20,
                 new TranslatableText("frontported.main.toggleSprint"),
@@ -32,8 +33,8 @@ public final class FrontPortedMainScreen extends Screen {
         
         // "ToggleSneak" Button
         this.addButton(new ButtonWidget(
-                (this.width / 2) - 75,
-                (this.height / 6) + 24 * this.buttons.size(),
+                this.width / 2 - 75,
+                this.height / 6 + 24 * this.buttons.size(),
                 150, 20,
                 new TranslatableText("frontported.main.toggleSneak"),
                 button -> this.client.openScreen(new FrontPortedOptionsScreen(this, new TranslatableText("frontported.main.toggleSneak"), Config.Category.TOGGLE_SNEAK){})
@@ -41,8 +42,8 @@ public final class FrontPortedMainScreen extends Screen {
         
         // "Coords HUD" Button
         this.addButton(new ButtonWidget(
-                (this.width / 2) - 75,
-                (this.height / 6) + 24 * this.buttons.size(),
+                this.width / 2 - 75,
+                this.height / 6 + 24 * this.buttons.size(),
                 150, 20,
                 new TranslatableText("frontported.main.coordsHud"),
                 button -> this.client.openScreen(new FrontPortedOptionsScreen(this, new TranslatableText("frontported.main.coordsHud"), Config.Category.COORDS_HUD){})
@@ -50,8 +51,8 @@ public final class FrontPortedMainScreen extends Screen {
         
         // "Kill Sounds" Button
         this.addButton(new ButtonWidget(
-                (this.width / 2) - 75,
-                (this.height / 6) + 24 * this.buttons.size(),
+                this.width / 2 - 75,
+                this.height / 6 + 24 * this.buttons.size(),
                 150, 20,
                 new TranslatableText("frontported.main.killSounds"),
                 button -> this.client.openScreen(new FrontPortedOptionsScreen(this, new TranslatableText("frontported.main.killSounds"), Config.Category.KILL_SOUND){})
@@ -59,8 +60,8 @@ public final class FrontPortedMainScreen extends Screen {
         
         // "Chat" Button
         this.addButton(new ButtonWidget(
-                (this.width / 2) - 75,
-                (this.height / 6) + 24 * this.buttons.size(),
+                this.width / 2 - 75,
+                this.height / 6 + 24 * this.buttons.size(),
                 150, 20,
                 new TranslatableText("frontported.main.chat"),
                 button -> this.client.openScreen(new FrontPortedOptionsScreen(this, new TranslatableText("frontported.main.chat"), Config.Category.CHAT){})
@@ -68,8 +69,8 @@ public final class FrontPortedMainScreen extends Screen {
         
         // "Vanilla" Button
         this.addButton(new ButtonWidget(
-                (this.width / 2) - 75,
-                (this.height / 6) + 24 * this.buttons.size(),
+                this.width / 2 - 75,
+                this.height / 6 + 24 * this.buttons.size(),
                 150, 20,
                 new TranslatableText("frontported.main.vanilla"),
                 button -> this.client.openScreen(new FrontPortedOptionsScreen(this, new TranslatableText("frontported.main.vanilla"), Config.Category.VANILLA) {
@@ -78,8 +79,8 @@ public final class FrontPortedMainScreen extends Screen {
                         if (this.client == null)
                             return;
                         this.addButton(new ButtonWidget(
-                                (this.width / 2) - 75,
-                                (this.height / 6) + ((this.options.size() >= 10 ? 12 : 24) * this.buttons.size()),
+                                this.width / 2 - 75,
+                                this.height / 6 + (this.options.size() >= 10 ? 12 : 24) * this.buttons.size(),
                                 150, 20,
                                 new TranslatableText("frontported.options.vanilla.editPositions"),
                                 button -> this.client.openScreen(new VanillaPositionsScreen(this))
@@ -90,8 +91,8 @@ public final class FrontPortedMainScreen extends Screen {
         
         // "BlockOverlay" Button
         this.addButton(new ButtonWidget(
-                (this.width / 2) - 75,
-                (this.height / 6) + 24 * this.buttons.size(),
+                this.width / 2 - 75,
+                this.height / 6 + 24 * this.buttons.size(),
                 150, 20,
                 new TranslatableText("frontported.main.blockOverlay"),
                 button -> this.client.openScreen(new FrontPortedOptionsScreen(this, new TranslatableText("frontported.main.blockOverlay"), Config.Category.BLOCK_OVERLAY) {})
@@ -99,8 +100,8 @@ public final class FrontPortedMainScreen extends Screen {
         
         // "Miscellaneous" Button
         this.addButton(new ButtonWidget(
-                (this.width / 2) - 75,
-                (this.height / 6) + 24 * this.buttons.size(),
+                this.width / 2 - 75,
+                this.height / 6 + 24 * this.buttons.size(),
                 150, 20,
                 new TranslatableText("frontported.main.misc"),
                 button -> this.client.openScreen(new FrontPortedOptionsScreen(this, new TranslatableText("frontported.main.misc"), Config.Category.MISC){})
@@ -108,11 +109,11 @@ public final class FrontPortedMainScreen extends Screen {
         
         // "Done" Button
         this.addButton(new ButtonWidget(
-                (this.width / 2) - 100,
-                (this.height / 6) + (24 * (this.buttons.size() + 1)),
+                this.width / 2 - 100,
+                this.height / 6 + 24 * (this.buttons.size() + 1),
                 200, 20,
                 ScreenTexts.DONE,
-                (b) -> this.onClose()
+                b -> this.onClose()
         ));
         
     }
@@ -120,7 +121,7 @@ public final class FrontPortedMainScreen extends Screen {
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         this.renderBackground(matrices);
-        drawCenteredText(matrices, this.textRenderer, this.title, this.width / 2, 20, 16777215);
+        drawCenteredText(matrices, this.textRenderer, this.title, this.width / 2, 20, 0xFFFFFF);
         super.render(matrices, mouseX, mouseY, delta);
     }
     

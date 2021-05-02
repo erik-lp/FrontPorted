@@ -22,14 +22,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-/**
- * Taken from Giz5Mod under MIT license (https://github.com/Toshimichi0915/giz5/blob/master/LICENSE.md)
- */
 @Mixin(InGameOverlayRenderer.class)
 public class InGameOverlayRendererMixin {
     
     private static boolean supportSodium = true;
     
+    /**
+     * Taken from Giz5Mod under MIT license (https://github.com/Toshimichi0915/giz5/blob/master/LICENSE.md)
+     */
     @Inject(at = @At("HEAD"), method = "renderFireOverlay(Lnet/minecraft/client/MinecraftClient;Lnet/minecraft/client/util/math/MatrixStack;)V", cancellable = true)
     private static void renderFireOverlay(MinecraftClient client, MatrixStack matrixStack, CallbackInfo info) {
         

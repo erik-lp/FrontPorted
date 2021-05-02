@@ -2,9 +2,11 @@ package me.erik.frontported;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import me.erik.frontported.commands.ChatMacroCommand;
 import me.erik.frontported.config.Config;
 import me.erik.frontported.features.*;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.client.command.v1.ClientCommandManager;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.options.KeyBinding;
@@ -54,6 +56,9 @@ public class FrontPorted implements ModInitializer {
         
         KillSound.init();
         SlotLocking.init();
+        ChatReplacements.init();
+    
+        ChatMacroCommand.register(ClientCommandManager.DISPATCHER);
         
     }
     

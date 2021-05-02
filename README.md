@@ -14,5 +14,4 @@ FrontPorted is a fabric mod for 1.16.5 that "front-ports" features from older mo
 - Better Chat Background
 - Slot Locking
 - Coords HUD
-- KeyStrokes (planned)
 - ...

@@ -117,9 +117,6 @@ public class Config {
     @Option(Category.MISC)
     public boolean chatReplacements = true;
     
-    @Option(Category.MISC)
-    public boolean damageOverlay = true;
-    
     // Chat
     @Option(Category.CHAT)
     public boolean customChatBackground = true;
@@ -195,26 +192,6 @@ public class Config {
     
     @Option(Category.VANILLA)
     public boolean disableLinkConfirmation = false;
-    
-    @Option(Category.VANILLA)
-    public boolean moveVanillaComponents = true;
-    
-    // Vanilla Positions
-    @Option(Category.VANILLA_POSITIONS)
-    @DoubleOption(max = 1920D)
-    public double vanilla_hotbar_x = 1360;
-    
-    @Option(Category.VANILLA_POSITIONS)
-    @DoubleOption(max = 1080D)
-    public double vanilla_hotbar_y = 1000;
-    
-    @Option(Category.VANILLA_POSITIONS)
-    @DoubleOption(max = 1920D)
-    public double vanilla_chat_x = 0;
-    
-    @Option(Category.VANILLA_POSITIONS)
-    @DoubleOption(max = 1080D)
-    public double vanilla_chat_y = 600;
     
     public List<Field> get(Category category) {
         Stream<Field> stream = Arrays.stream(this.getClass().getFields())

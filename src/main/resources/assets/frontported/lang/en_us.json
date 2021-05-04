@@ -65,12 +65,6 @@
     
     "frontported.options.vanilla.doubleCheckDisconnect": "Confirm Disconnect",
     "frontported.options.vanilla.doubleCheckLanguageChange": "Confirm Language Change",
-    "frontported.options.vanilla.disableLinkConfirmation": "Disable Link Warnings",
-    "frontported.options.vanilla.moveVanillaComponents": "Move Vanilla GUIs",
-    "frontported.options.vanilla.editPositions": "Vanilla GUI Editor",
-    "frontported.options.vanilla.positions.hotbarX": "Hotbar X: %f",
-    "frontported.options.vanilla.positions.hotbarY": "Hotbar Y: %f",
-    "frontported.options.vanilla.positions.chatX": "Chat X: %f",
-    "frontported.options.vanilla.positions.chatY": "Chat Y: %f"
+    "frontported.options.vanilla.disableLinkConfirmation": "Disable Link Warnings"
     
 }

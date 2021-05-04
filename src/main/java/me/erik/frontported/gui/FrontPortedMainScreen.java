@@ -73,20 +73,7 @@ public final class FrontPortedMainScreen extends Screen {
                 this.height / 6 + 24 * this.buttons.size(),
                 150, 20,
                 new TranslatableText("frontported.main.vanilla"),
-                button -> this.client.openScreen(new FrontPortedOptionsScreen(this, new TranslatableText("frontported.main.vanilla"), Config.Category.VANILLA) {
-                    @Override
-                    protected void addAdditionalButtons() {
-                        if (this.client == null)
-                            return;
-                        this.addButton(new ButtonWidget(
-                                this.width / 2 - 75,
-                                this.height / 6 + (this.options.size() >= 10 ? 12 : 24) * this.buttons.size(),
-                                150, 20,
-                                new TranslatableText("frontported.options.vanilla.editPositions"),
-                                button -> this.client.openScreen(new VanillaPositionsScreen(this))
-                        ));
-                    }
-                })
+                button -> this.client.openScreen(new FrontPortedOptionsScreen(this, new TranslatableText("frontported.main.vanilla"), Config.Category.VANILLA){})
         ));
         
         // "BlockOverlay" Button
